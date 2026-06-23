@@ -1,0 +1,406 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A trip for Kami — six options</title><style>
+:root{--ink:#1d1b16;--cream:#faf7f1;--paper:#fffdf8;--clay:#b5532a;--green:#3f6b54;--gold:#9a7b2e;--line:#e7e0d2;--muted:#7c7568}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+h1,h2,h3,h4,h5{font-family:Georgia,"Iowan Old Style","Times New Roman",serif;font-weight:700;letter-spacing:-.01em;line-height:1.15}
+a{color:var(--clay)}
+html,body{overflow-x:hidden}
+.nav{background:var(--cream);border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px}
+.tab{flex:0 0 auto;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:8px 14px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;transition:.15s}
+.tab:hover{border-color:#cbb89a}
+.tab.r{border-left:4px solid var(--green)}
+.tab.s{border-left:4px solid #6a8caf}
+.tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.panel{display:block;scroll-margin-top:64px}
+.panel + .panel{border-top:8px solid var(--line)}
+.hero{min-height:60vh;background-size:cover;background-position:center;display:flex;align-items:flex-end;color:#fff}
+.hero-in{max-width:1040px;margin:0 auto;width:100%;padding:36px 22px}
+.grouptag{display:inline-block;font:600 11px/1 -apple-system,sans-serif;letter-spacing:.13em;text-transform:uppercase;padding:6px 11px;border-radius:999px;margin-bottom:14px}
+.g-retreat{background:var(--green);color:#fff}.g-short{background:#5b7fa6;color:#fff}
+.hero h2{font-size:clamp(34px,6vw,60px);margin:.1em 0}
+.hero .region{font-size:15px;letter-spacing:.04em;text-transform:uppercase;opacity:.9;margin:.2em 0 .5em}
+.hero .tag{font-size:clamp(17px,2.4vw,22px);max-width:30em;margin:.2em 0 1em;opacity:.97}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.32);padding:7px 12px;border-radius:999px;font-size:13.5px;font-weight:600;backdrop-filter:blur(3px)}
+.body,.ov-body{max-width:1040px;margin:0 auto;padding:30px 22px 70px}
+.pitch{font-size:19px;line-height:1.65;border-left:4px solid var(--clay);padding-left:18px;margin:6px 0 30px}
+.body h3{font-size:23px;margin:38px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.lcard{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(40,30,10,.05)}
+.lc-img{height:170px;background-size:cover;background-position:center;background-color:#e9e2d3}
+.lc-noimg{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;background:repeating-linear-gradient(45deg,#efe9db,#efe9db 12px,#e9e2d3 12px,#e9e2d3 24px)}
+.lc-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.lc-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.lc-head h4{font-size:18px;margin:0}
+.price{background:var(--green);color:#fff;font:700 12.5px/1 -apple-system,sans-serif;padding:5px 9px;border-radius:8px;white-space:nowrap}
+.why{margin:0;font-size:14.5px;color:#3f3a31}
+.sky{margin:0;font-size:13px;color:var(--gold);font-weight:600}
+.book{margin-top:auto;align-self:flex-start;background:var(--ink);color:#fff;text-decoration:none;padding:9px 15px;border-radius:9px;font-size:14px;font-weight:600}
+.book:hover{background:var(--clay)}
+.more{margin:14px 0 0}.more a{font-weight:600}
+.daygrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.daycard{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px}
+.daycard .di{font-size:26px}.daycard h5{font-size:16px;margin:8px 0 6px}.daycard p{margin:0;font-size:14.5px;color:#3f3a31}
+.ggrid{columns:3;column-gap:12px}
+@media(max-width:820px){.ggrid{columns:2}}
+@media(max-width:520px){.ggrid{columns:1}}
+.gcell{break-inside:avoid;margin:0 0 12px;position:relative;border-radius:12px;overflow:hidden;cursor:zoom-in;background:#e9e2d3}
+.gcell img{width:100%;display:block;transition:.4s}
+.gcell:hover img{transform:scale(1.05)}
+.gcell figcaption{position:absolute;left:0;right:0;bottom:0;font-size:12px;color:#fff;background:linear-gradient(0deg,rgba(0,0,0,.78),transparent);padding:22px 12px 9px;opacity:0;transition:.2s}
+.gcell:hover figcaption{opacity:1}
+.honest{margin-top:34px;background:#fcf3e9;border:1px solid #eccdab;border-left:5px solid var(--clay);border-radius:12px;padding:16px 18px;font-size:15px}
+.ov-hero{background:linear-gradient(135deg,#2a3b30,#3f6b54);color:#fff;padding:54px 22px}
+.ov-hero h1{font-size:clamp(34px,6vw,56px);max-width:1040px;margin:0 auto}
+.ov-sub{max-width:760px;margin:14px auto 0;font-size:18px;opacity:.96}
+.callout{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:20px 0}
+.callout h3{margin:0 0 8px;border:0!important;padding:0!important;font-size:21px}
+.callout.green{border-left:5px solid var(--green)}
+.callout.clay{border-left:5px solid var(--clay);background:#fcf3e9}
+.ov-body h3{font-size:23px;margin:30px 0 14px}
+.cmp{width:100%;border-collapse:collapse;font-size:14.5px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.cmp th{background:var(--ink);color:#fff;text-align:left;padding:11px 12px;font:600 13px/1.2 -apple-system,sans-serif}
+.cmp td{padding:11px 12px;border-top:1px solid var(--line);vertical-align:top}
+.muted{color:var(--muted);font-size:13px}
+.lb{display:none;position:fixed;inset:0;z-index:90;background:rgba(15,12,8,.92);align-items:center;justify-content:center;flex-direction:column;padding:24px;cursor:zoom-out}
+.lb.on{display:flex}
+.lb img{max-width:94vw;max-height:82vh;border-radius:8px;box-shadow:0 10px 50px rgba(0,0,0,.5)}
+.lb p{color:#eee;font-size:14px;margin:14px 0 0;max-width:60em;text-align:center}
+footer{max-width:1040px;margin:0 auto;padding:24px 22px 60px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
+</style></head><body>
+<div class="nav"><button class="tab active" data-t="overview">Overview</button><button class="tab r" data-t="sancris">San Cristóbal de las Casas</button><button class="tab r" data-t="atitlan">Lake Atitlán</button><button class="tab r" data-t="sanjose">San José del Pacífico</button><button class="tab s" data-t="oaxaca">Oaxaca City</button><button class="tab s" data-t="sanpancho">San Pancho</button><button class="tab s" data-t="cdmx">Mexico City</button></div>
+<section class="panel active" id="p-overview">
+  <div class="ov-hero">
+    <h1>A trip for Kami</h1>
+    <p class="ov-sub">Six ways to trade a costume weekend in New Orleans for something she'll actually remember. Three short getaways, three slow retreats where she paints all day and I work off Starlink — same money, just spent on beauty instead of a bar tab.</p>
+  </div>
+  <div class="ov-body">
+    <div class="callout">
+      <h3>The idea</h3>
+      <p>This replaces the Aug 8 Red Dress Run. Two shapes: a tight <b>3–4 night getaway</b>, or a longer <b>paint-all-day retreat</b> where cheap-but-beautiful lodging frees up a daily delta — my spend stays flat, the savings cover her lost shifts, and the trip gets <em>longer</em> instead of pricier.</p>
+    </div>
+    <div class="callout green">
+      <h3>🛰️ The Starlink unlock</h3>
+      <p>The retreats only work if I can work. <b>Starlink Mini</b> makes "remote" and "I have a job" stop fighting: ~$499 box, ~$50/mo (pausable), <b>10–15 min setup</b> — unbox, point at open sky, plug in. Performance (100–200 Mbps) is a non-issue for everything I do. The only homework is picking a casita with sky exposure and bringing a small battery for outages. Two of the retreat lodges already run Starlink, so that risk is pre-solved.</p>
+    </div>
+    <h3>The six at a glance</h3>
+    <table class="cmp">
+      <tr><th>Place</th><th>Getting there</th><th>August weather</th><th>Lodging / night</th><th>Connectivity</th></tr>
+      <tr><td>🟢 <b>San Cristóbal de las Casas</b><br><span class="muted">Chiapas, Mexico</span></td><td>1 stop via MEX, ~6–7h</td><td>Mild ~70°F, afternoon rain</td><td>$73–124 / night</td><td>Town fiber + Starlink</td></tr><tr><td>🟢 <b>Lake Atitlán</b><br><span class="muted">Guatemala · San Marcos La Laguna</span></td><td>1 stop to GUA + shuttle/boat</td><td>~75°F, afternoon rain</td><td>$80–130 / night</td><td>Starlink advertised on-site</td></tr><tr><td>🟢 <b>San José del Pacífico</b><br><span class="muted">Sierra Sur, Oaxaca, Mexico</span></td><td>Fly OAX + ~3h mountain drive</td><td>Cool &amp; misty, 50s–60s</td><td>$50–105 / night</td><td>Starlink at Laberinto</td></tr><tr><td>🔵 <b>Oaxaca City</b><br><span class="muted">Oaxaca, Mexico</span></td><td>1 stop via DFW</td><td>Mild mid-70s, PM rain</td><td>$100–150 / night</td><td>Fiber + Starlink</td></tr><tr><td>🔵 <b>San Pancho</b><br><span class="muted">Nayarit, Mexico · Riviera Nayarit</span></td><td>Nonstop AUS→PVR + 1h car</td><td>Hot &amp; humid, low-90s</td><td>$95–150 / night</td><td>Town fiber + Starlink</td></tr><tr><td>🔵 <b>Mexico City</b><br><span class="muted">Roma Norte / Condesa</span></td><td>Nonstop Aeroméxico</td><td>Cool low-70s, PM rain</td><td>$110–150 / night</td><td>Strong fiber</td></tr>
+    </table>
+    <p class="muted">🟢 retreat &nbsp;·&nbsp; 🔵 short trip &nbsp;·&nbsp; all-in for two ran roughly $1.6–2.6k (San Pancho / CDMX) to $2–3.2k (Oaxaca, 4 nts); retreats trend lower per night the longer you stay.</p>
+    <div class="callout clay">
+      <h3>My pick</h3>
+      <p><b>San Cristóbal de las Casas</b> is the smart execution — cheap-but-beautiful, open sky, fiber + Starlink redundancy, cool weather, and paintable on every corner. <b>Lake Atitlán</b> is the one she'd remember forever if we go a step further. Open each tab above for lodging, a day-by-day, and real photos. Then let her draw — and tell me the winner.</p>
+    </div>
+  </div>
+</section>
+<section class="panel" id="p-sancris">
+      <div class="hero" style="background-image:linear-gradient(180deg,rgba(20,18,14,.12),rgba(20,18,14,.82)),url(&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Inmediaciones_de_la_Catedral_de_San_Crist%C3%B3bal_de_las_Casas%2C_Chiapas_-_4.jpg/1280px-Inmediaciones_de_la_Catedral_de_San_Crist%C3%B3bal_de_las_Casas%2C_Chiapas_-_4.jpg&quot;)">
+        <div class="hero-in">
+          <span class="grouptag g-retreat">RETREAT — paint all day, work off Starlink</span>
+          <h2>San Cristóbal de las Casas</h2>
+          <p class="region">Chiapas, Mexico</p>
+          <p class="tag">The smart retreat — cobblestone color, cool mountain air, something to paint on every corner.</p>
+          <div class="chips"><span class="chip">✈️ 1 stop via MEX, ~6–7h</span><span class="chip">🌡️ Mild ~70°F, afternoon rain</span><span class="chip">🛏️ $73–124 / night</span><span class="chip">🛰️ Town fiber + Starlink</span></div>
+        </div>
+      </div>
+      <div class="body">
+        <p class="pitch">This is the one I'd book. A colonial highland town at 7,200 feet where the air is cool, the streets are saturated with color, and Maya textile markets spill out by the cathedral. Cheap-but-beautiful lodging, real fiber <em>and</em> Starlink as backup, and a paintable subject down every lane. She works the morning light; you work the afternoon rain. Lowest-friction way to run the whole idea.</p>
+        <h3>Where you'd stay</h3>
+        <div class="lgrid"><div class="lcard"><div class="lc-img lc-noimg"><span>View photos on site →</span></div>
+      <div class="lc-body"><div class="lc-head"><h4>Hotel Guayaba Inn</h4><span class="price">~$73–95</span></div>
+      <p class="why">Classic colonial house wrapped in an orchid-and-bromeliad botanical garden, intact central patio. Ranked #1 in town.</p>
+      <p class="sky">🛰️ Big open central patio — strong dish line-of-sight.</p>
+      <a class="book" href="https://www.guayabainn.com/" target="_blank" rel="noopener">View &amp; book →</a></div></div><div class="lcard"><div class="lc-img" style="background-image:url(&quot;https://casalum.com/wp-content/uploads/2020/07/hotel-en-san-cristobal-de-las-casas-0-300x225.jpg&quot;)"></div>
+      <div class="lc-body"><div class="lc-head"><h4>Casa Lum</h4><span class="price">~$116–124</span></div>
+      <p class="why">Eight design rooms named in Tzotzil, on the pedestrian Real de Guadalupe a block off the plaza. Platinum eco-certified.</p>
+      <p class="sky">🛰️ Rooftop terrace above the rooms — usable sky.</p>
+      <a class="book" href="https://casalum.com/en/" target="_blank" rel="noopener">View &amp; book →</a></div></div></div>
+        <p class="more"><a href="https://www.airbnb.com/san-cristobal-de-las-casas-mexico/stays" target="_blank" rel="noopener">+ browse curated Airbnb stays here →</a></p>
+        <h3>A day here</h3>
+        <div class="daygrid"><div class="daycard"><div class="di">⛰️</div><h5>Hike & move</h5><p>El Arcotete river cave, Huitepec cloud-forest reserve, surrounding highland trails — go mornings.</p></div><div class="daycard"><div class="di">🎨</div><h5>Paint & shoot</h5><p>Colonial streets of Real de Guadalupe &amp; El Cerrillo, Santo Domingo facade + textile market, the Maya village of San Juan Chamula.</p></div><div class="daycard"><div class="di">🌿</div><h5>Rest & reset</h5><p>Courtyard cafés off the andador, Na Bolom museum gardens, slow afternoons.</p></div></div>
+        <h3>What it actually looks like</h3>
+        <div class="ggrid"><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Street_Scene_-_San_Juan_Chamula_-_Chiapas_-_Mexico.jpg/1280px-Street_Scene_-_San_Juan_Chamula_-_Chiapas_-_Mexico.jpg','San Juan Chamula, Chiapas, Mexico')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Street_Scene_-_San_Juan_Chamula_-_Chiapas_-_Mexico.jpg/1280px-Street_Scene_-_San_Juan_Chamula_-_Chiapas_-_Mexico.jpg" alt="San Juan Chamula, Chiapas, Mexico">
+          <figcaption>San Juan Chamula, Chiapas, Mexico</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Tzotzil_Woman_-_San_Juan_Chamula_-_Chiapas_-_Mexico.jpg/1280px-Tzotzil_Woman_-_San_Juan_Chamula_-_Chiapas_-_Mexico.jpg','San Juan Chamula, Chiapas, Mexico')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Tzotzil_Woman_-_San_Juan_Chamula_-_Chiapas_-_Mexico.jpg/1280px-Tzotzil_Woman_-_San_Juan_Chamula_-_Chiapas_-_Mexico.jpg" alt="San Juan Chamula, Chiapas, Mexico">
+          <figcaption>San Juan Chamula, Chiapas, Mexico</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Carnaval_San_Juan_chamula%2C_Plaza_de_San_juan.jpg/1280px-Carnaval_San_Juan_chamula%2C_Plaza_de_San_juan.jpg','Se puede apreciar los participantes del carnaval haciendo rituales y bailes tradicionales del carnaval.')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Carnaval_San_Juan_chamula%2C_Plaza_de_San_juan.jpg/1280px-Carnaval_San_Juan_chamula%2C_Plaza_de_San_juan.jpg" alt="Se puede apreciar los participantes del carnaval haciendo rituales y bailes tradicionales del carnaval.">
+          <figcaption>Se puede apreciar los participantes del carnaval haciendo rituales y bailes tradicionales del carnaval.</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/San_Juan_Chamula_-_Chiapas_-_Mexico_-_panoramio.jpg/1280px-San_Juan_Chamula_-_Chiapas_-_Mexico_-_panoramio.jpg','San Juan Chamula - Chiapas - Mexico')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/San_Juan_Chamula_-_Chiapas_-_Mexico_-_panoramio.jpg/1280px-San_Juan_Chamula_-_Chiapas_-_Mexico_-_panoramio.jpg" alt="San Juan Chamula - Chiapas - Mexico">
+          <figcaption>San Juan Chamula - Chiapas - Mexico</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/6/67/ATMEX_Fam_Trip_Chiapas_Adventure_Sopa_Chiapa.jpg','Soup, Chiapas, Mexico please credit: JoyAndJourney.com')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/6/67/ATMEX_Fam_Trip_Chiapas_Adventure_Sopa_Chiapa.jpg" alt="Soup, Chiapas, Mexico please credit: JoyAndJourney.com">
+          <figcaption>Soup, Chiapas, Mexico please credit: JoyAndJourney.com</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Cocina_tradicional_en_Zinacant%C3%A1n%2C_Chiapas_2.jpg/1280px-Cocina_tradicional_en_Zinacant%C3%A1n%2C_Chiapas_2.jpg','Cocina tradicional en Zinacantán, Chiapas')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Cocina_tradicional_en_Zinacant%C3%A1n%2C_Chiapas_2.jpg/1280px-Cocina_tradicional_en_Zinacant%C3%A1n%2C_Chiapas_2.jpg" alt="Cocina tradicional en Zinacantán, Chiapas">
+          <figcaption>Cocina tradicional en Zinacantán, Chiapas</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Catedral_de_San_Crist%C3%B3bal_de_las_Casas_1.jpg/1280px-Catedral_de_San_Crist%C3%B3bal_de_las_Casas_1.jpg','This is a photo of a monument in Mexico, identified by ID')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Catedral_de_San_Crist%C3%B3bal_de_las_Casas_1.jpg/1280px-Catedral_de_San_Crist%C3%B3bal_de_las_Casas_1.jpg" alt="This is a photo of a monument in Mexico, identified by ID">
+          <figcaption>This is a photo of a monument in Mexico, identified by ID</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Catedral_San_Crist%C3%B3bal_de_las_Casas_foto_nocturna.jpg/1280px-Catedral_San_Crist%C3%B3bal_de_las_Casas_foto_nocturna.jpg','Fotografía tomada en Junio 2023')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Catedral_San_Crist%C3%B3bal_de_las_Casas_foto_nocturna.jpg/1280px-Catedral_San_Crist%C3%B3bal_de_las_Casas_foto_nocturna.jpg" alt="Fotografía tomada en Junio 2023">
+          <figcaption>Fotografía tomada en Junio 2023</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/San_Crist%C3%B3bal_de_Las_Casas_18.jpg/1280px-San_Crist%C3%B3bal_de_Las_Casas_18.jpg','Die Kathedrale von San Cristobal, Mexiko.')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/San_Crist%C3%B3bal_de_Las_Casas_18.jpg/1280px-San_Crist%C3%B3bal_de_Las_Casas_18.jpg" alt="Die Kathedrale von San Cristobal, Mexiko.">
+          <figcaption>Die Kathedrale von San Cristobal, Mexiko.</figcaption></figure></div>
+        <div class="honest"><b>The honest read.</b> August is mild (~70s°F) with near-daily afternoon rain — front-load outdoor work, paint and edit indoors after ~2pm. Highland air, zero heat.</div>
+      </div>
+    </section><section class="panel" id="p-atitlan">
+      <div class="hero" style="background-image:linear-gradient(180deg,rgba(20,18,14,.12),rgba(20,18,14,.82)),url(&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Atitlan_Lake.jpg/1280px-Atitlan_Lake.jpg&quot;)">
+        <div class="hero-in">
+          <span class="grouptag g-retreat">RETREAT — paint all day, work off Starlink</span>
+          <h2>Lake Atitlán</h2>
+          <p class="region">Guatemala · San Marcos La Laguna</p>
+          <p class="tag">The dream version — a volcano-ringed lake built for slow living and remote work.</p>
+          <div class="chips"><span class="chip">✈️ 1 stop to GUA + shuttle/boat</span><span class="chip">🌡️ ~75°F, afternoon rain</span><span class="chip">🛏️ $80–130 / night</span><span class="chip">🛰️ Starlink advertised on-site</span></div>
+        </div>
+      </div>
+      <div class="body">
+        <p class="pitch">The painter's-retreat archetype on Earth: three volcanoes ringing a deep blue lake, indigenous color in every village, ~5,000 ft and cool, and an economy built entirely around slow-living remote workers. At $100/night you get a lakefront casita and change. The only cost is distance — it's Guatemala, a bigger door-to-door than Mexico. The reward is a place nothing else on this list can touch.</p>
+        <h3>Where you'd stay</h3>
+        <div class="lgrid"><div class="lcard"><div class="lc-img lc-noimg"><span>View photos on site →</span></div>
+      <div class="lc-body"><div class="lc-head"><h4>Atitlán Sunset Lodge</h4><span class="price">~$90–130</span></div>
+      <p class="why">Lakefront apartments with private terraces and sunset volcano views; kayaks, sauna, hot tub. Boat-in from Panajachel.</p>
+      <p class="sky">🛰️ Open western lake exposure and already runs high-speed Starlink. The work pick.</p>
+      <a class="book" href="https://atitlansunsetlodge.com/" target="_blank" rel="noopener">View &amp; book →</a></div></div><div class="lcard"><div class="lc-img lc-noimg"><span>View photos on site →</span></div>
+      <div class="lc-body"><div class="lc-head"><h4>Casa Paloma</h4><span class="price">~$80–120</span></div>
+      <p class="why">Artisan-decorated private casitas in a garden retreat in San Marcos.</p>
+      <p class="sky">🛰️ Ask for Azul or Piedra — water&#x27;s-edge, open sky.</p>
+      <a class="book" href="https://casapalomaretreat.com/accommodations" target="_blank" rel="noopener">View &amp; book →</a></div></div><div class="lcard"><div class="lc-img" style="background-image:url(&quot;http://static1.squarespace.com/static/60281ed2663ff8049348ff19/t/60e4f9a185f50d725c2d7956/1625618849310/LUSH_Social-Sharing.jpg?format=1500w&quot;)"></div>
+      <div class="lc-body"><div class="lc-head"><h4>Lush Atitlán</h4><span class="price">boutique</span></div>
+      <p class="why">Eco-boutique built into the nature-reserve rock face — lush gardens, big lake views.</p>
+      <p class="sky">🛰️ Hillside — confirm sky exposure before relying on Starlink.</p>
+      <a class="book" href="https://www.lushatitlan.com/" target="_blank" rel="noopener">View &amp; book →</a></div></div></div>
+        <p class="more"><a href="https://www.airbnb.com/s/San-Marcos-La-Laguna--Guatemala/homes" target="_blank" rel="noopener">+ browse curated Airbnb stays here →</a></p>
+        <h3>A day here</h3>
+        <div class="daygrid"><div class="daycard"><div class="di">⛰️</div><h5>Hike & move</h5><p>Indian Nose sunrise (volcano-over-lake light), Cerro Tzankujil reserve, the village-to-village lake trail.</p></div><div class="daycard"><div class="di">🎨</div><h5>Paint & shoot</h5><p>Volcano-lake panoramas at golden hour, Maya textiles &amp; market color in San Pedro, painted doorways and tuk-tuks.</p></div><div class="daycard"><div class="di">🌿</div><h5>Rest & reset</h5><p>Lakefront swims and docks, San Marcos yoga / sound-bath scene, kayak at dawn.</p></div></div>
+        <h3>What it actually looks like</h3>
+        <div class="ggrid"><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/San_Marcos_La_Laguna%2C_d%C3%A9barcad%C3%A8re.jpg/1280px-San_Marcos_La_Laguna%2C_d%C3%A9barcad%C3%A8re.jpg','San Marcos La Laguna, débarcadère')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/San_Marcos_La_Laguna%2C_d%C3%A9barcad%C3%A8re.jpg/1280px-San_Marcos_La_Laguna%2C_d%C3%A9barcad%C3%A8re.jpg" alt="San Marcos La Laguna, débarcadère">
+          <figcaption>San Marcos La Laguna, débarcadère</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/b/b0/San_Pablo_y_San_Marcos_del_bello_Lago_%28110470737%29.jpg','San Pablo y San Marcos del bello Lago, Guatemala')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/b/b0/San_Pablo_y_San_Marcos_del_bello_Lago_%28110470737%29.jpg" alt="San Pablo y San Marcos del bello Lago, Guatemala">
+          <figcaption>San Pablo y San Marcos del bello Lago, Guatemala</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Typical_Guatemalan_breakfast_-_San_Juan_la_Laguna%2C_Guatemala.jpg/1280px-Typical_Guatemalan_breakfast_-_San_Juan_la_Laguna%2C_Guatemala.jpg','Beans, home-made cheese, fried plantains, tortillas and coffee with Angel and his wife at my Guatemalan homestay :-) San Juan la Laguna on L')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Typical_Guatemalan_breakfast_-_San_Juan_la_Laguna%2C_Guatemala.jpg/1280px-Typical_Guatemalan_breakfast_-_San_Juan_la_Laguna%2C_Guatemala.jpg" alt="Beans, home-made cheese, fried plantains, tortillas and coffee with Angel and his wife at my Guatemalan homestay :-) San Juan la Laguna on L">
+          <figcaption>Beans, home-made cheese, fried plantains, tortillas and coffee with Angel and his wife at my Guatemalan homestay :-) San Juan la Laguna on L</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Lago_de_Atitl%C3%A1n_seen_from_Santiago_Atitl%C3%A1n.jpg/1280px-Lago_de_Atitl%C3%A1n_seen_from_Santiago_Atitl%C3%A1n.jpg','A photo of Lago de Atitlán seen from a small town Santiago Atitlán taken on 3 February 2018.')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Lago_de_Atitl%C3%A1n_seen_from_Santiago_Atitl%C3%A1n.jpg/1280px-Lago_de_Atitl%C3%A1n_seen_from_Santiago_Atitl%C3%A1n.jpg" alt="A photo of Lago de Atitlán seen from a small town Santiago Atitlán taken on 3 February 2018.">
+          <figcaption>A photo of Lago de Atitlán seen from a small town Santiago Atitlán taken on 3 February 2018.</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Lago_de_Atitlan_con_barcos_Guatemala_Abril_1975.jpg/1280px-Lago_de_Atitlan_con_barcos_Guatemala_Abril_1975.jpg','Lake Atitlan, Guatemala, April 1975')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Lago_de_Atitlan_con_barcos_Guatemala_Abril_1975.jpg/1280px-Lago_de_Atitlan_con_barcos_Guatemala_Abril_1975.jpg" alt="Lake Atitlan, Guatemala, April 1975">
+          <figcaption>Lake Atitlan, Guatemala, April 1975</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Lago_de_Atitlan%2C_Guatemala%2C_Abril_1975_02.jpg/1280px-Lago_de_Atitlan%2C_Guatemala%2C_Abril_1975_02.jpg','Lake Atitlan, Guatemala, 1975')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Lago_de_Atitlan%2C_Guatemala%2C_Abril_1975_02.jpg/1280px-Lago_de_Atitlan%2C_Guatemala%2C_Abril_1975_02.jpg" alt="Lake Atitlan, Guatemala, 1975">
+          <figcaption>Lake Atitlan, Guatemala, 1975</figcaption></figure></div>
+        <div class="honest"><b>The honest read.</b> August: 70s–80s highland days, near-daily afternoon rain — mornings for hikes and photography, afternoons for painting and wellness. The real catch is travel time, not weather.</div>
+      </div>
+    </section><section class="panel" id="p-sanjose">
+      <div class="hero" style="background-image:linear-gradient(180deg,rgba(20,18,14,.12),rgba(20,18,14,.82)),url(&quot;https://upload.wikimedia.org/wikipedia/commons/c/c7/San_Jos%C3%A9_del_Pac%C3%ADfico.jpg&quot;)">
+        <div class="hero-in">
+          <span class="grouptag g-retreat">RETREAT — paint all day, work off Starlink</span>
+          <h2>San José del Pacífico</h2>
+          <p class="region">Sierra Sur, Oaxaca, Mexico</p>
+          <p class="tag">The purist&#x27;s hideout — cabins in the clouds, dirt cheap, gloriously remote.</p>
+          <div class="chips"><span class="chip">✈️ Fly OAX + ~3h mountain drive</span><span class="chip">🌡️ Cool &amp; misty, 50s–60s</span><span class="chip">🛏️ $50–105 / night</span><span class="chip">🛰️ Starlink at Laberinto</span></div>
+        </div>
+      </div>
+      <div class="body">
+        <p class="pitch">A cloud-forest village strung along a mountain ridge, where the clouds roll in below you and pine mist swallows the road at dusk. Cabins are dirt cheap, the sunsets sit <em>above</em> the weather, and the silence is total. This is the romantic, off-grid extreme — and the only option where your connection is a genuine risk, so it lives or dies on picking the right cabin.</p>
+        <h3>Where you'd stay</h3>
+        <div class="lgrid"><div class="lcard"><div class="lc-img" style="background-image:url(&quot;https://static.wixstatic.com/media/6b2782_a68754e0a4174b01a76b18235f83b440%7Emv2.jpg/v1/fit/w_2500,h_1330,al_c/6b2782_a68754e0a4174b01a76b18235f83b440%7Emv2.jpg&quot;)"></div>
+      <div class="lc-body"><div class="lc-head"><h4>Laberinto del Pacífico</h4><span class="price">~$50–90</span></div>
+      <p class="why">Cloud Cabin &amp; Treehouse on a private 30-hectare forest ridge, 10 min from a sunset mirador; on-site temazcal.</p>
+      <p class="sky">🛰️ Mountaintop ridge and already runs Starlink — the best bet here. Ask for the widest clearing.</p>
+      <a class="book" href="https://www.laberintodelpacifico.com/cabins" target="_blank" rel="noopener">View &amp; book →</a></div></div><div class="lcard"><div class="lc-img" style="background-image:url(&quot;https://sanjosepacifico.com/wp-content/uploads/2022/01/558a5c56-6383-48f6-9027-992e30b89e6e.jpg&quot;)"></div>
+      <div class="lc-body"><div class="lc-head"><h4>Cabañas San José del Pacífico</h4><span class="price">~$50–105</span></div>
+      <p class="why">Mushroom-shaped &#x27;Hongo&#x27; cabin, fireplaces, full kitchens, valley views, 2 min from town.</p>
+      <p class="sky">🛰️ Valley-facing — confirm pine cover before relying on Starlink.</p>
+      <a class="book" href="https://sanjosepacifico.com/alojamiento/" target="_blank" rel="noopener">View &amp; book →</a></div></div></div>
+        <p class="more"><a href="https://es.airbnb.com/san-jose-del-pacifico-mexico/stays/cabins" target="_blank" rel="noopener">+ browse curated Airbnb stays here →</a></p>
+        <h3>A day here</h3>
+        <div class="daygrid"><div class="daycard"><div class="di">⛰️</div><h5>Hike & move</h5><p>Pine-forest trails to a mirador for the sea of clouds at sunrise.</p></div><div class="daycard"><div class="di">🎨</div><h5>Paint & shoot</h5><p>The drifting mountain mist and the signature sunsets above the clouds.</p></div><div class="daycard"><div class="di">🌿</div><h5>Rest & reset</h5><p>Temazcal sweat-lodge, fog-wrapped comedor lunches, read and nap.</p></div></div>
+        <h3>What it actually looks like</h3>
+        <div class="ggrid"><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/e/e5/Oaxaca_fern.jpg','Tree fern in cloud forest above Valle Nacional (I think), en:Oaxaca , Mexico , May 2006. Identification welcome. — JerryFriedman 20:09, 27 M')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Oaxaca_fern.jpg" alt="Tree fern in cloud forest above Valle Nacional (I think), en:Oaxaca , Mexico , May 2006. Identification welcome. — JerryFriedman 20:09, 27 M">
+          <figcaption>Tree fern in cloud forest above Valle Nacional (I think), en:Oaxaca , Mexico , May 2006. Identification welcome. — JerryFriedman 20:09, 27 M</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Bosque_Comaltepec.JPG/1280px-Bosque_Comaltepec.JPG','The Cloud Forest of Santiago Comaltepec, Oaxaca, Mexico is some the best conserved in the world')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Bosque_Comaltepec.JPG/1280px-Bosque_Comaltepec.JPG" alt="The Cloud Forest of Santiago Comaltepec, Oaxaca, Mexico is some the best conserved in the world">
+          <figcaption>The Cloud Forest of Santiago Comaltepec, Oaxaca, Mexico is some the best conserved in the world</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Mezcal_bottles_.jpg/1280px-Mezcal_bottles_.jpg','Mezcal bottles at a factory in Teotitlán del Valle , Oaxaca .')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Mezcal_bottles_.jpg/1280px-Mezcal_bottles_.jpg" alt="Mezcal bottles at a factory in Teotitlán del Valle , Oaxaca .">
+          <figcaption>Mezcal bottles at a factory in Teotitlán del Valle , Oaxaca .</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/6/66/Mezcal_flight_from_Suerte.jpg','Three glasses of Mezcal served on a tray with orange slices and various salts from Suerte in Austin, Texas, US')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/6/66/Mezcal_flight_from_Suerte.jpg" alt="Three glasses of Mezcal served on a tray with orange slices and various salts from Suerte in Austin, Texas, US">
+          <figcaption>Three glasses of Mezcal served on a tray with orange slices and various salts from Suerte in Austin, Texas, US</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/The_Monte_Alban_Mezcal_02.jpg/1280px-The_Monte_Alban_Mezcal_02.jpg','The Monte Alban Mezcal')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/The_Monte_Alban_Mezcal_02.jpg/1280px-The_Monte_Alban_Mezcal_02.jpg" alt="The Monte Alban Mezcal">
+          <figcaption>The Monte Alban Mezcal</figcaption></figure></div>
+        <div class="honest"><b>The honest read.</b> Genuinely remote and isolating — one tiny village, thin services, cloud forest that can swallow the sky for days. Confirm Starlink line-of-sight in writing before booking and bring a backup hotspot. This is the one place where your work connection is a real risk.</div>
+      </div>
+    </section><section class="panel" id="p-oaxaca">
+      <div class="hero" style="background-image:linear-gradient(180deg,rgba(20,18,14,.12),rgba(20,18,14,.82)),url(&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Church_of_Santo_Domingo_in_Oaxaca.jpg/1280px-Church_of_Santo_Domingo_in_Oaxaca.jpg&quot;)">
+        <div class="hero-in">
+          <span class="grouptag g-short">SHORT TRIP — the original draw deck</span>
+          <h2>Oaxaca City</h2>
+          <p class="region">Oaxaca, Mexico</p>
+          <p class="tag">Best soul — Mexico&#x27;s food-and-craft capital, cool and endlessly walkable.</p>
+          <div class="chips"><span class="chip">✈️ 1 stop via DFW</span><span class="chip">🌡️ Mild mid-70s, PM rain</span><span class="chip">🛏️ $100–150 / night</span><span class="chip">🛰️ Fiber + Starlink</span></div>
+        </div>
+      </div>
+      <div class="body">
+        <p class="pitch">The food-and-craft capital of Mexico, and the most soulful of the six. Mezcal, mole negro, hand-dyed rugs, ruins on a hilltop, and a Centro that photographs itself. The catch is the DFW connection — it eats a half-day each end, which is why this one wants 4 nights, not 3.</p>
+        <h3>Where you'd stay</h3>
+        <div class="lgrid"><div class="lcard"><div class="lc-img" style="background-image:url(&quot;https://hotellosamantes.com/api/opengraph?propertyName=Hotel+Los+Amantes+Oaxaca&amp;propertyImage=https%3A%2F%2Fimg.guruhotel.dev%2Finsecure%2Frs%3Afill%3A1400%3A700%2Fg%3Asm%2FczM6Ly9ndXJ1aG90ZWxmaWxlcy9wcm9kdWN0aW9uL2NkNDdmNTBkLTRmYzItNDU3Ni1hN2JhLTg0MDg5ZmE3ODZkZi9pbWFnZS0xNzE5MzU0NTQ0MTk2LW44ODlmbWNpYzQuanBn&quot;)"></div>
+      <div class="lc-body"><div class="lc-head"><h4>Hotel Los Amantes</h4><span class="price">~$130–150</span></div>
+      <p class="why">Restored colonial steps from Santo Domingo, Guillermo Olguín art throughout; breakfast on the rooftop.</p>
+      <p class="sky">🛰️ Solarium rooftop — open sky.</p>
+      <a class="book" href="https://hotellosamantes.com/" target="_blank" rel="noopener">View &amp; book →</a></div></div><div class="lcard"><div class="lc-img" style="background-image:url(&quot;https://www.hotelconcorazon.com/media/yootheme/cache/db/King-patio-room-oaxaca-db227355.jpg?src=images/oaxaca/rooms/King-patio-room-oaxaca.jpg&amp;thumbnail=600,400,&amp;cache=false&amp;hash=42e1f18b&quot;)"></div>
+      <div class="lc-body"><div class="lc-head"><h4>Hotel con Corazón</h4><span class="price">~$100–138</span></div>
+      <p class="why">Bright, well-designed social-enterprise hotel at the edge of Centro; work-friendly commons.</p>
+      <p class="sky">🛰️ Rooftop terrace.</p>
+      <a class="book" href="https://www.hotelconcorazon.com/oaxaca" target="_blank" rel="noopener">View &amp; book →</a></div></div><div class="lcard"><div class="lc-img" style="background-image:url(&quot;http://webbox.imgix.net/images/nojiwqlkvbsefdwf/2ef2b9e2-dd33-41b6-8841-96c8eb13c92f.png&quot;)"></div>
+      <div class="lc-body"><div class="lc-head"><h4>Na&#x27;ura Hotel Boutique</h4><span class="price">~$120–150</span></div>
+      <p class="why">Colonial charmer two blocks from the Zócalo — central courtyard, third-floor terrace and a small rooftop pool.</p>
+      <p class="sky">🛰️ Rooftop terrace + pool.</p>
+      <a class="book" href="https://www.hotelnaura.com/" target="_blank" rel="noopener">View &amp; book →</a></div></div></div>
+        <p class="more"><a href="https://www.airbnb.com/s/Oaxaca-Centro--Oaxaca--Mexico/homes" target="_blank" rel="noopener">+ browse curated Airbnb stays here →</a></p>
+        <h3>A day here</h3>
+        <div class="daygrid"><div class="daycard"><div class="di">⛰️</div><h5>Hike & move</h5><p>Monte Albán (go early), Hierve el Agua petrified falls.</p></div><div class="daycard"><div class="di">🎨</div><h5>Paint & shoot</h5><p>Santo Domingo and its courtyards, Mercado 20 de Noviembre &amp; Benito Juárez, Teotitlán del Valle weaving.</p></div><div class="daycard"><div class="di">🌿</div><h5>Rest & reset</h5><p>Jardín Etnobotánico, a mezcalería tasting, slow rooftop mornings.</p></div></div>
+        <h3>What it actually looks like</h3>
+        <div class="ggrid"><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/f/f2/Monte_Alb%C3%A1n_archeological_site%2C_Oaxaca.jpg','Monte Albán archeological site, Oaxaca')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Monte_Alb%C3%A1n_archeological_site%2C_Oaxaca.jpg" alt="Monte Albán archeological site, Oaxaca">
+          <figcaption>Monte Albán archeological site, Oaxaca</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Group_of_visitors_at_Monte_Alban_1976.jpg/1280px-Group_of_visitors_at_Monte_Alban_1976.jpg','Group of visitors from the Institute of Maya Studies at the pre-Columbian site of Monte Alban, Oaxaca, 1976')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Group_of_visitors_at_Monte_Alban_1976.jpg/1280px-Group_of_visitors_at_Monte_Alban_1976.jpg" alt="Group of visitors from the Institute of Maya Studies at the pre-Columbian site of Monte Alban, Oaxaca, 1976">
+          <figcaption>Group of visitors from the Institute of Maya Studies at the pre-Columbian site of Monte Alban, Oaxaca, 1976</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Monte_Alb%C3%A1n_aspectos_01.jpg/1280px-Monte_Alb%C3%A1n_aspectos_01.jpg','Ruinas de Monte Albán en Oaxaca de Juárez, México')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Monte_Alb%C3%A1n_aspectos_01.jpg/1280px-Monte_Alb%C3%A1n_aspectos_01.jpg" alt="Ruinas de Monte Albán en Oaxaca de Juárez, México">
+          <figcaption>Ruinas de Monte Albán en Oaxaca de Juárez, México</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Aspecto_de_Monte_Alb%C3%A1n%2C_Oaxaca.jpg/1280px-Aspecto_de_Monte_Alb%C3%A1n%2C_Oaxaca.jpg','Imagen capturada desde Monte Albán, Oaxaca, México')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Aspecto_de_Monte_Alb%C3%A1n%2C_Oaxaca.jpg/1280px-Aspecto_de_Monte_Alb%C3%A1n%2C_Oaxaca.jpg" alt="Imagen capturada desde Monte Albán, Oaxaca, México">
+          <figcaption>Imagen capturada desde Monte Albán, Oaxaca, México</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Mole_negro_de_Oaxaca_con_arroz.jpg/1280px-Mole_negro_de_Oaxaca_con_arroz.jpg','Mole negro (Black mole) from Oaxaca with chicken and a portion of white rice.')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Mole_negro_de_Oaxaca_con_arroz.jpg/1280px-Mole_negro_de_Oaxaca_con_arroz.jpg" alt="Mole negro (Black mole) from Oaxaca with chicken and a portion of white rice.">
+          <figcaption>Mole negro (Black mole) from Oaxaca with chicken and a portion of white rice.</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Enchiladas_de_mole_negro_oaxaque%C3%B1o.jpg/1280px-Enchiladas_de_mole_negro_oaxaque%C3%B1o.jpg','classic mexican food')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Enchiladas_de_mole_negro_oaxaque%C3%B1o.jpg/1280px-Enchiladas_de_mole_negro_oaxaque%C3%B1o.jpg" alt="classic mexican food">
+          <figcaption>classic mexican food</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/c/c9/Mole_oaxaque%C3%B1o.png','Mole oaxaqueño')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Mole_oaxaque%C3%B1o.png" alt="Mole oaxaqueño">
+          <figcaption>Mole oaxaqueño</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Templo_de_Santo_Domingo_de_Guzm%C3%A1n%2C_Oaxaca-2.jpg/1280px-Templo_de_Santo_Domingo_de_Guzm%C3%A1n%2C_Oaxaca-2.jpg','Church of Santo Domingo de Guzmán in Oaxaca City , Mexico .')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Templo_de_Santo_Domingo_de_Guzm%C3%A1n%2C_Oaxaca-2.jpg/1280px-Templo_de_Santo_Domingo_de_Guzm%C3%A1n%2C_Oaxaca-2.jpg" alt="Church of Santo Domingo de Guzmán in Oaxaca City , Mexico .">
+          <figcaption>Church of Santo Domingo de Guzmán in Oaxaca City , Mexico .</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/4/46/Santo_Domingo_Oaxaca_MRD.jpg','Outside the Templo de Santo Domingo de Guzmán in Oaxaca de Juárez, showing agave plantings')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/4/46/Santo_Domingo_Oaxaca_MRD.jpg" alt="Outside the Templo de Santo Domingo de Guzmán in Oaxaca de Juárez, showing agave plantings">
+          <figcaption>Outside the Templo de Santo Domingo de Guzmán in Oaxaca de Juárez, showing agave plantings</figcaption></figure></div>
+        <div class="honest"><b>The honest read.</b> Cool mid-70s with afternoon storms — great weather. Best soul of the six, but the connection makes the 3-night version feel rushed. Stretch it to 4.</div>
+      </div>
+    </section><section class="panel" id="p-sanpancho">
+      <div class="hero" style="background-image:linear-gradient(180deg,rgba(20,18,14,.12),rgba(20,18,14,.82)),url(&quot;https://upload.wikimedia.org/wikipedia/commons/3/3e/San_Pancho_Beach.jpg&quot;)">
+        <div class="hero-in">
+          <span class="grouptag g-short">SHORT TRIP — the original draw deck</span>
+          <h2>San Pancho</h2>
+          <p class="region">Nayarit, Mexico · Riviera Nayarit</p>
+          <p class="tag">The rest trip — a quiet beach town one street wide, Sayulita&#x27;s mellow neighbor.</p>
+          <div class="chips"><span class="chip">✈️ Nonstop AUS→PVR + 1h car</span><span class="chip">🌡️ Hot &amp; humid, low-90s</span><span class="chip">🛏️ $95–150 / night</span><span class="chip">🛰️ Town fiber + Starlink</span></div>
+        </div>
+      </div>
+      <div class="body">
+        <p class="pitch">One sandy street running down to a near-empty Pacific beach, with artsy Sayulita a 15-minute hop away for color and markets. Stay in calm San Pancho, day-trip into the noise, retreat to quiet at night. It's the pure-rest option — and the only one that won't beat the Texas heat.</p>
+        <h3>Where you'd stay</h3>
+        <div class="lgrid"><div class="lcard"><div class="lc-img" style="background-image:url(&quot;https://www.sanpanchorealty.com/wp-content/uploads/2018/07/1bedroom-sanpancho-mexico-sanpancho-040.jpg&quot;)"></div>
+      <div class="lc-body"><div class="lc-head"><h4>Casita San Pancho</h4><span class="price">~$95</span></div>
+      <p class="why">Romantic 1BR casita by architect Luis Ruiz — open-air kitchen, indoor garden, across the street from the sand.</p>
+      <p class="sky">🛰️ Open-air patio; good town/beach exposure.</p>
+      <a class="book" href="https://sanpanchorealty.com/properties/casita-san-pancho/" target="_blank" rel="noopener">View &amp; book →</a></div></div><div class="lcard"><div class="lc-img" style="background-image:url(&quot;https://www.casasanpancho.com/assets/img/facebook_share.jpg&quot;)"></div>
+      <div class="lc-body"><div class="lc-head"><h4>Hotel Casa San Pancho</h4><span class="price">~$120–150</span></div>
+      <p class="why">Ten-room hideaway five blocks from the beach with a saltwater pool.</p>
+      <p class="sky">🛰️ Master Suite has two open mountain terraces — strong sky.</p>
+      <a class="book" href="https://www.casasanpancho.com/" target="_blank" rel="noopener">View &amp; book →</a></div></div><div class="lcard"><div class="lc-img" style="background-image:url(&quot;http://static1.squarespace.com/static/5bcf36d129f2cc350d1f5a6e/t/5bd106f5104c7bf87e63af8d/1540425462300/LOGO+CIELO+ROJOmini.jpg?format=1500w&quot;)"></div>
+      <div class="lc-body"><div class="lc-head"><h4>Hotel Cielo Rojo</h4><span class="price">boutique</span></div>
+      <p class="why">Cobblestone-town boutique with original artwork and a well-known bistro; pool.</p>
+      <p class="sky">🛰️ Confirm a terrace room for sky exposure.</p>
+      <a class="book" href="https://www.hotelcielorojo.com/" target="_blank" rel="noopener">View &amp; book →</a></div></div></div>
+        <p class="more"><a href="https://www.airbnb.com/san-pancho-mexico/stays/guesthouses" target="_blank" rel="noopener">+ browse curated Airbnb stays here →</a></p>
+        <h3>A day here</h3>
+        <div class="daygrid"><div class="daycard"><div class="di">⛰️</div><h5>Hike & move</h5><p>River-valley jungle trail / the cerro behind town — early-AM birdlife.</p></div><div class="daycard"><div class="di">🎨</div><h5>Paint & shoot</h5><p>Playa San Pancho surf at golden hour, muralled cobblestone streets, Sayulita color and markets 15 min away.</p></div><div class="daycard"><div class="di">🌿</div><h5>Rest & reset</h5><p>Beach sunsets, café mornings, the seasonal sea-turtle release.</p></div></div>
+        <h3>What it actually looks like</h3>
+        <div class="ggrid"><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/d/d0/Sayulita_Nayarit.jpg','Sayulita Nayarit')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Sayulita_Nayarit.jpg" alt="Sayulita Nayarit">
+          <figcaption>Sayulita Nayarit</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Playa_de_Sayulita_desde_un_dron_05.jpg/1280px-Playa_de_Sayulita_desde_un_dron_05.jpg','Playa de Sayulita desde un dron')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Playa_de_Sayulita_desde_un_dron_05.jpg/1280px-Playa_de_Sayulita_desde_un_dron_05.jpg" alt="Playa de Sayulita desde un dron">
+          <figcaption>Playa de Sayulita desde un dron</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/c/c9/Sayulita_Playa.jpg','Costa de la playa de Sayulita, una aldea de México localizada cerca de la Riviera Nayarit.')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Sayulita_Playa.jpg" alt="Costa de la playa de Sayulita, una aldea de México localizada cerca de la Riviera Nayarit.">
+          <figcaption>Costa de la playa de Sayulita, una aldea de México localizada cerca de la Riviera Nayarit.</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Sayulita_%2860845%29.jpg/1280px-Sayulita_%2860845%29.jpg','Sayulita (town in Bahía de Banderas Municipality, State of Nayarit, Mexico)')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Sayulita_%2860845%29.jpg/1280px-Sayulita_%2860845%29.jpg" alt="Sayulita (town in Bahía de Banderas Municipality, State of Nayarit, Mexico)">
+          <figcaption>Sayulita (town in Bahía de Banderas Municipality, State of Nayarit, Mexico)</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Ceviche%2C_seafood_tacos%2C_chips%2C_guacamole%2C_beans_%2834662952704%29.jpg/1280px-Ceviche%2C_seafood_tacos%2C_chips%2C_guacamole%2C_beans_%2834662952704%29.jpg','El Camello Jr / Tulum / 05/21/17')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Ceviche%2C_seafood_tacos%2C_chips%2C_guacamole%2C_beans_%2834662952704%29.jpg/1280px-Ceviche%2C_seafood_tacos%2C_chips%2C_guacamole%2C_beans_%2834662952704%29.jpg" alt="El Camello Jr / Tulum / 05/21/17">
+          <figcaption>El Camello Jr / Tulum / 05/21/17</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Ceviche_-_coctail_from_seafood.jpg/1280px-Ceviche_-_coctail_from_seafood.jpg','This photo has been taken in the country: Mexico')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Ceviche_-_coctail_from_seafood.jpg/1280px-Ceviche_-_coctail_from_seafood.jpg" alt="This photo has been taken in the country: Mexico">
+          <figcaption>This photo has been taken in the country: Mexico</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Ceviche_de_pescado_con_tostadas.jpg/1280px-Ceviche_de_pescado_con_tostadas.jpg','Ceviche de pescado con tostadas')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Ceviche_de_pescado_con_tostadas.jpg/1280px-Ceviche_de_pescado_con_tostadas.jpg" alt="Ceviche de pescado con tostadas">
+          <figcaption>Ceviche de pescado con tostadas</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/A_street_vendor_in_Playa_San_Pancho%2C_Mexico.jpg/1280px-A_street_vendor_in_Playa_San_Pancho%2C_Mexico.jpg','A street vendor in Playa San Pancho, Mexico')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/A_street_vendor_in_Playa_San_Pancho%2C_Mexico.jpg/1280px-A_street_vendor_in_Playa_San_Pancho%2C_Mexico.jpg" alt="A street vendor in Playa San Pancho, Mexico">
+          <figcaption>A street vendor in Playa San Pancho, Mexico</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Atardecer_en_la_Playa_San_Pancho%2C_Nayarit_59.jpg/1280px-Atardecer_en_la_Playa_San_Pancho%2C_Nayarit_59.jpg','Atardecer en la Playa San Pancho, Nayarit')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Atardecer_en_la_Playa_San_Pancho%2C_Nayarit_59.jpg/1280px-Atardecer_en_la_Playa_San_Pancho%2C_Nayarit_59.jpg" alt="Atardecer en la Playa San Pancho, Nayarit">
+          <figcaption>Atardecer en la Playa San Pancho, Nayarit</figcaption></figure></div>
+        <div class="honest"><b>The honest read.</b> The only one that won&#x27;t beat the Texas heat — low-90s, humid, and August is the Pacific rain/hurricane window. You&#x27;d go for the water and the calm, not to cool off.</div>
+      </div>
+    </section><section class="panel" id="p-cdmx">
+      <div class="hero" style="background-image:linear-gradient(180deg,rgba(20,18,14,.12),rgba(20,18,14,.82)),url(&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Mexico_City_Palacio_de_bellas_artes.jpg/1280px-Mexico_City_Palacio_de_bellas_artes.jpg&quot;)">
+        <div class="hero-in">
+          <span class="grouptag g-short">SHORT TRIP — the original draw deck</span>
+          <h2>Mexico City</h2>
+          <p class="region">Roma Norte / Condesa</p>
+          <p class="tag">Do-it-all — leafy, walkable, world-class food at 7,400 feet.</p>
+          <div class="chips"><span class="chip">✈️ Nonstop Aeroméxico</span><span class="chip">🌡️ Cool low-70s, PM rain</span><span class="chip">🛏️ $110–150 / night</span><span class="chip">🛰️ Strong fiber</span></div>
+        </div>
+      </div>
+      <div class="body">
+        <p class="pitch">A leafy, walkable metropolis where you land and you're <em>there</em> — no transfer. Tree-lined café neighborhoods, rooftop dinners, world-class museums and food, all at 7,400 ft of cool air. Honestly a city, not a reset — but it's the easy, do-it-all option that feels like a bigger, prettier version of your own walkable life.</p>
+        <h3>Where you'd stay</h3>
+        <div class="lgrid"><div class="lcard"><div class="lc-img" style="background-image:url(&quot;https://casonaroma.com/wp-content/uploads/2024/06/logo-casona.png&quot;)"></div>
+      <div class="lc-body"><div class="lc-head"><h4>Casona Roma Norte</h4><span class="price">~$110–150</span></div>
+      <p class="why">Restored mansion, 32 warm-minimalist rooms, a 2025 Michelin Key; photogenic courtyards and tilework.</p>
+      <p class="sky">🛰️ City hotel — fiber, not Starlink.</p>
+      <a class="book" href="https://casonaroma.com/" target="_blank" rel="noopener">View &amp; book →</a></div></div><div class="lcard"><div class="lc-img" style="background-image:url(&quot;https://cdn.prod.website-files.com/64c1452cd7f7a96ac1fafe8f/64cae958f6e7d3c0a3021fc6_test-slider.png&quot;)"></div>
+      <div class="lc-body"><div class="lc-head"><h4>Colima 71</h4><span class="price">boutique</span></div>
+      <p class="why">Boutique art hotel in Roma Norte — sculptural interiors, gallery vibe, balconies over Colima street.</p>
+      <p class="sky">🛰️ City fiber.</p>
+      <a class="book" href="https://www.colima71.com/" target="_blank" rel="noopener">View &amp; book →</a></div></div><div class="lcard"><div class="lc-img lc-noimg"><span>View photos on site →</span></div>
+      <div class="lc-body"><div class="lc-head"><h4>Maria Condesa</h4><span class="price">boutique</span></div>
+      <p class="why">Sixteen individually designed rooms (Piñeda Covalín art), terrace breakfast, a bohemian Condesa block.</p>
+      <p class="sky">🛰️ City fiber.</p>
+      <a class="book" href="https://mariacondesa.ytt-group.com.mx/en/" target="_blank" rel="noopener">View &amp; book →</a></div></div></div>
+        <p class="more"><a href="https://www.airbnb.com/roma-norte-ciudad-de-mexico/stays/boutique-hotels" target="_blank" rel="noopener">+ browse curated Airbnb stays here →</a></p>
+        <h3>A day here</h3>
+        <div class="daygrid"><div class="daycard"><div class="di">⛰️</div><h5>Hike & move</h5><p>Bosque de Chapultepec; day trip to the Desierto de los Leones pine forest.</p></div><div class="daycard"><div class="di">🎨</div><h5>Paint & shoot</h5><p>Palacio de Bellas Artes, Roma/Condesa Art Nouveau facades, Mercado de Medellín, Coyoacán color.</p></div><div class="daycard"><div class="di">🌿</div><h5>Rest & reset</h5><p>Parque México, café mornings at Rosetta or Cardinal.</p></div></div>
+        <h3>What it actually looks like</h3>
+        <div class="ggrid"><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Ciudad_de_M%C3%A9xico_-_Bosque_de_Chapultepec_0598.JPG/1280px-Ciudad_de_M%C3%A9xico_-_Bosque_de_Chapultepec_0598.JPG','Chapultepec botanical garden, Mexico City .')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Ciudad_de_M%C3%A9xico_-_Bosque_de_Chapultepec_0598.JPG/1280px-Ciudad_de_M%C3%A9xico_-_Bosque_de_Chapultepec_0598.JPG" alt="Chapultepec botanical garden, Mexico City .">
+          <figcaption>Chapultepec botanical garden, Mexico City .</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/June_2007_Chapultepec_3.jpg/1280px-June_2007_Chapultepec_3.jpg','June 2007 Chapultepec')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/June_2007_Chapultepec_3.jpg/1280px-June_2007_Chapultepec_3.jpg" alt="June 2007 Chapultepec">
+          <figcaption>June 2007 Chapultepec</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Chapultepec_Zoo_-_Jaguar_%2802%29.jpg/1280px-Chapultepec_Zoo_-_Jaguar_%2802%29.jpg','Jaguar ( Panthera onca ) in Chapultepec Zoo.')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Chapultepec_Zoo_-_Jaguar_%2802%29.jpg/1280px-Chapultepec_Zoo_-_Jaguar_%2802%29.jpg" alt="Jaguar ( Panthera onca ) in Chapultepec Zoo.">
+          <figcaption>Jaguar ( Panthera onca ) in Chapultepec Zoo.</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Bosque_de_Chapultepec_-_View_from_Northwest_terrace_-_Chapultepec_Castle_-_Mexico_2024.jpg/1280px-Bosque_de_Chapultepec_-_View_from_Northwest_terrace_-_Chapultepec_Castle_-_Mexico_2024.jpg','Northwest terrace - Chapultepec Castle - Mexico')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Bosque_de_Chapultepec_-_View_from_Northwest_terrace_-_Chapultepec_Castle_-_Mexico_2024.jpg/1280px-Bosque_de_Chapultepec_-_View_from_Northwest_terrace_-_Chapultepec_Castle_-_Mexico_2024.jpg" alt="Northwest terrace - Chapultepec Castle - Mexico">
+          <figcaption>Northwest terrace - Chapultepec Castle - Mexico</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/%28El_Flaco%29_Al_Pastor_Tacos.jpg/1280px-%28El_Flaco%29_Al_Pastor_Tacos.jpg','Various Food Spots, Puerto Vallarta, MX Date Visited: November 27 - 30, 2014 City Foodsters Facebook | Twitter | Instagram')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/%28El_Flaco%29_Al_Pastor_Tacos.jpg/1280px-%28El_Flaco%29_Al_Pastor_Tacos.jpg" alt="Various Food Spots, Puerto Vallarta, MX Date Visited: November 27 - 30, 2014 City Foodsters Facebook | Twitter | Instagram">
+          <figcaption>Various Food Spots, Puerto Vallarta, MX Date Visited: November 27 - 30, 2014 City Foodsters Facebook | Twitter | Instagram</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/001_Tacos_de_carnitas%2C_carne_asada_y_al_pastor.jpg/1280px-001_Tacos_de_carnitas%2C_carne_asada_y_al_pastor.jpg','Carnitas, carne asada and al pastor. Tino&#x27;s is a food truck in Roseburg. Sits at a Shell Station on Garden Valley Blvd. The carnitas was esp')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/001_Tacos_de_carnitas%2C_carne_asada_y_al_pastor.jpg/1280px-001_Tacos_de_carnitas%2C_carne_asada_y_al_pastor.jpg" alt="Carnitas, carne asada and al pastor. Tino&#x27;s is a food truck in Roseburg. Sits at a Shell Station on Garden Valley Blvd. The carnitas was esp">
+          <figcaption>Carnitas, carne asada and al pastor. Tino&#x27;s is a food truck in Roseburg. Sits at a Shell Station on Garden Valley Blvd. The carnitas was esp</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/0/07/Tacos_al_pastor%2C_taco_de_panza.jpg','Big Star, Chicago')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/0/07/Tacos_al_pastor%2C_taco_de_panza.jpg" alt="Big Star, Chicago">
+          <figcaption>Big Star, Chicago</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Palacio_de_Bellas_Artes%2C_M%C3%A9xico_D.F.%2C_M%C3%A9xico%2C_2013-10-13%2C_DD_40.jpg/1280px-Palacio_de_Bellas_Artes%2C_M%C3%A9xico_D.F.%2C_M%C3%A9xico%2C_2013-10-13%2C_DD_40.jpg','Interior view of the dome of the Palacio de Bellas Artes (Palace of Fine Arts) of Mexico City . The building, located in the historic center')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Palacio_de_Bellas_Artes%2C_M%C3%A9xico_D.F.%2C_M%C3%A9xico%2C_2013-10-13%2C_DD_40.jpg/1280px-Palacio_de_Bellas_Artes%2C_M%C3%A9xico_D.F.%2C_M%C3%A9xico%2C_2013-10-13%2C_DD_40.jpg" alt="Interior view of the dome of the Palacio de Bellas Artes (Palace of Fine Arts) of Mexico City . The building, located in the historic center">
+          <figcaption>Interior view of the dome of the Palacio de Bellas Artes (Palace of Fine Arts) of Mexico City . The building, located in the historic center</figcaption></figure><figure class="gcell" onclick="lb('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Palaco_de_Bellas_Artes%2C_Mexico_City%2C_from_across_Eje_Central_Lazaro_Cardenas_in_evening.jpg/1280px-Palaco_de_Bellas_Artes%2C_Mexico_City%2C_from_across_Eje_Central_Lazaro_Cardenas_in_evening.jpg','Palacio de Bellas Artes , Mexico City, seen from opposite street corner at dusk.')">
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Palaco_de_Bellas_Artes%2C_Mexico_City%2C_from_across_Eje_Central_Lazaro_Cardenas_in_evening.jpg/1280px-Palaco_de_Bellas_Artes%2C_Mexico_City%2C_from_across_Eje_Central_Lazaro_Cardenas_in_evening.jpg" alt="Palacio de Bellas Artes , Mexico City, seen from opposite street corner at dusk.">
+          <figcaption>Palacio de Bellas Artes , Mexico City, seen from opposite street corner at dusk.</figcaption></figure></div>
+        <div class="honest"><b>The honest read.</b> It&#x27;s a dense city, not a retreat — the do-it-all pick. Cool and rainy in August, with the best fiber of the six, so the easiest place to actually work. Keep Starlink as a backstop only.</div>
+      </div>
+    </section>
+<footer>
+<b>Honest notes.</b> Photos are real, freely-licensed images of these actual places via <a href="https://commons.wikimedia.org" target="_blank">Wikimedia Commons</a>, plus each property's own <code>og:image</code> — they're representative of the town and the lodging, not necessarily the exact room you'd get. Prices are summer / low-season estimates for two; a few boutique hotels publish no public rate, so those are inquiry-based. Verify exact August availability and pricing at the booking link before paying. Airbnb links are curated <em>search</em> URLs (their listing pages block automated reads) and stay valid as individual listings rotate. Images load live, so you need an internet connection to see them. Prepared June 23, 2026.
+</footer>
+<div class="lb" id="lbx" onclick="lboff()"><img id="lbi" src=""><p id="lbc"></p></div>
+<script>
+var tabs=document.querySelectorAll('.tab'),panels=document.querySelectorAll('.panel');
+tabs.forEach(function(t){t.onclick=function(){
+  document.getElementById('p-'+t.dataset.t).scrollIntoView({behavior:'smooth',block:'start'});
+}});
+// highlight the section currently in view
+var byId={};tabs.forEach(function(t){byId[t.dataset.t]=t});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){
+  if(e.isIntersecting){var k=e.target.id.slice(2);
+    tabs.forEach(function(x){x.classList.remove('active')});
+    if(byId[k])byId[k].classList.add('active');}
+})},{rootMargin:'-55px 0px -70% 0px'});
+panels.forEach(function(p){io.observe(p)});
+function lb(src,cap){var b=document.getElementById('lbx');document.getElementById('lbi').src=src;
+  document.getElementById('lbc').textContent=cap;b.classList.add('on')}
+function lboff(){document.getElementById('lbx').classList.remove('on')}
+</script>
+</body></html>

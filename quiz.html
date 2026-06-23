@@ -1,0 +1,195 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Where should we go? — rank & pick</title><style>
+:root{--ink:#1d1b16;--cream:#faf7f1;--paper:#fffdf8;--clay:#b5532a;--green:#3f6b54;--gold:#9a7b2e;--line:#e7e0d2;--muted:#7c7568}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:hidden}
+body{background:var(--cream);color:var(--ink);font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+h1,h2,h3{font-family:Georgia,"Iowan Old Style","Times New Roman",serif;font-weight:700;letter-spacing:-.01em;line-height:1.18}
+.wrap{max-width:620px;margin:0 auto;padding:24px 20px 70px;min-height:100vh;display:flex;flex-direction:column}
+.intro{margin:auto 0;text-align:center}
+.intro h1{font-size:clamp(30px,7vw,42px);margin:.2em 0}
+.intro p{font-size:18px;color:#3f3a31;max-width:30em;margin:14px auto 0}
+.btn{display:inline-block;background:var(--ink);color:#fff;border:0;border-radius:12px;padding:15px 30px;font:600 17px/1 -apple-system,sans-serif;cursor:pointer;margin-top:24px}
+.btn:active{transform:scale(.98)}
+.btn.alt{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.btn.wide{display:block;width:100%;margin-top:18px}
+.btn[disabled]{opacity:.4}
+.qn{font:600 13px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h2.qt{font-size:clamp(23px,5.5vw,29px);margin:8px 0 6px}
+.lead{color:#3f3a31;font-size:15.5px;margin:0 0 18px}
+.opts{display:flex;flex-direction:column;gap:12px}
+.opt{display:flex;align-items:center;gap:14px;background:var(--paper);border:1.5px solid var(--line);border-radius:15px;padding:15px 16px;cursor:pointer;text-align:left;transition:.12s;width:100%}
+.opt:active{transform:scale(.99)}.opt:hover{border-color:#cbb89a}
+.opt .ol{font:700 18px/1.2 Georgia,serif}
+.opt .os{display:block;margin-top:4px;font-size:14px;color:#3f3a31}
+.opt.ranked{border-color:var(--green);background:#f1f6f2}
+.opt[disabled]{cursor:default}
+.rnk{flex:0 0 34px;height:34px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font:700 16px/1 -apple-system,sans-serif;color:var(--muted)}
+.opt.ranked .rnk{background:var(--green);border-color:var(--green);color:#fff}
+.txt{flex:1}
+.either{background:none;border:1px dashed var(--line);color:var(--muted);border-radius:13px;padding:13px;font:600 14.5px/1 -apple-system,sans-serif;cursor:pointer}
+.row2{display:flex;gap:10px;margin-top:18px;align-items:center;justify-content:space-between}
+.link{background:none;border:0;color:var(--clay);font:600 14px/1 -apple-system,sans-serif;cursor:pointer;padding:8px 0}
+.prog{display:flex;gap:6px;margin-bottom:22px}
+.dot{flex:1;height:6px;border-radius:99px;background:var(--line)}.dot.done{background:var(--green)}.dot.now{background:var(--clay)}
+.res h1{font-size:clamp(26px,6vw,36px);text-align:center;margin:.1em 0 4px}
+.res .sub{text-align:center;color:var(--muted);font-size:14.5px;margin-bottom:22px}
+.win{background:var(--paper);border:1.5px solid var(--green);border-left:6px solid var(--green);border-radius:15px;padding:18px;margin-bottom:20px}
+.win .badge{display:inline-block;background:var(--green);color:#fff;font:700 11px/1 -apple-system,sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border-radius:99px}
+.win h2{font-size:26px;margin:11px 0 3px}.win .d{color:#3f3a31;font-size:15px}
+.row{margin:13px 0}
+.row .rh{display:flex;justify-content:space-between;align-items:baseline;font-size:15.5px}
+.row .rh b{font-family:Georgia,serif;font-size:16.5px}
+.row .rh .pts{color:var(--muted);font:600 13px/1 -apple-system,sans-serif}
+.row .rd{font-size:12.5px;color:var(--muted);margin-top:1px}
+.bar{height:9px;background:var(--line);border-radius:99px;margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--clay))}
+.row.top .bar i{background:linear-gradient(90deg,#5a8c6f,var(--green))}
+.note{margin-top:22px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+.foot{margin-top:24px;text-align:center}
+.hide{display:none}
+</style></head><body>
+<div class="wrap">
+
+<section id="intro" class="intro">
+  <span class="qn">A trip for you</span>
+  <h1>Where should we go?</h1>
+  <p>Two steps. First, put what matters to you in order. Then answer one quick question for each. At the end it ranks six real places by your answers — no wrong choices.</p>
+  <button class="btn" onclick="goRank()">Start →</button>
+</section>
+
+<section id="rank" class="hide">
+  <span class="qn">Step 1 of 2</span>
+  <h2 class="qt">What matters most?</h2>
+  <p class="lead" id="ranklead">Tap these in order — most important first. Tap one again to undo it.</p>
+  <div class="opts" id="rankopts"></div>
+  <div class="row2"><button class="link" onclick="resetRank()">↺ start over</button>
+   <button class="btn alt" id="rankgo" disabled onclick="goQuiz()">Continue →</button></div>
+</section>
+
+<section id="quiz" class="hide">
+  <div class="prog" id="prog"></div>
+  <div id="q"></div>
+  <button class="link hide" id="back" onclick="qBack()">← back</button>
+</section>
+
+<section id="result" class="hide"></section>
+
+</div>
+<script>
+var LOC={
+ sancris:{name:"San Cristóbal de las Casas",d:"Highland colonial town · Chiapas, Mexico"},
+ atitlan:{name:"Lake Atitlán",d:"Volcano-ringed lake · Guatemala"},
+ sanjose:{name:"San José del Pacífico",d:"Cloud-forest cabins · Oaxaca, Mexico"},
+ oaxaca:{name:"Oaxaca City",d:"Food & craft capital · Mexico"},
+ sanpancho:{name:"San Pancho",d:"Quiet Pacific beach town · Nayarit"},
+ cdmx:{name:"Mexico City",d:"Roma Norte / Condesa"}
+};
+var ORDER=["sancris","atitlan","sanjose","oaxaca","sanpancho","cdmx"];
+
+// each axis: how it's named while ranking + the question + the two sides' fit (1 strong, .5 partial)
+var AXES=[
+ {id:"land",n:"Beach vs. mountains",sub:"The kind of place",
+  t:"Beach, or mountains?",
+  a:{l:"Beach & ocean",s:"Sand, surf, warm salt air",sc:{sanpancho:1}},
+  b:{l:"Mountains & highland",s:"Cool air, elevation, green",sc:{sancris:1,atitlan:1,sanjose:1}}},
+ {id:"energy",n:"City vs. remote",sub:"Buzz or stillness",
+  t:"City buzz, or remote & quiet?",
+  a:{l:"City buzz",s:"People, cafés, things on",sc:{cdmx:1,oaxaca:1,sancris:.5}},
+  b:{l:"Remote & quiet",s:"Stillness, nature, fewer people",sc:{sanjose:1,atitlan:1,sanpancho:.5,sancris:.5}}},
+ {id:"days",n:"Culture vs. nature",sub:"What fills the days",
+  t:"Days filled with culture, or nature?",
+  a:{l:"Culture, food & museums",s:"Markets, art, restaurants, ruins",sc:{cdmx:1,oaxaca:1,sancris:.5}},
+  b:{l:"Nature & the outdoors",s:"Trails, water, big landscapes",sc:{sanjose:1,atitlan:1,sanpancho:1,sancris:.5}}},
+ {id:"pace",n:"Packed vs. slow",sub:"The pace",
+  t:"Packed, or a slow reset?",
+  a:{l:"Packed & do-it-all",s:"See everything, full days",sc:{cdmx:1,oaxaca:1}},
+  b:{l:"Slow reset",s:"Few plans, room to breathe",sc:{sanpancho:1,atitlan:1,sanjose:1,sancris:.5}}},
+ {id:"paint",n:"What to paint",sub:"Streets or landscape",
+  t:"Streets & markets, or raw landscape?",
+  a:{l:"Colorful streets & markets",s:"Doorways, textiles, faces, food",sc:{sancris:1,oaxaca:1,atitlan:.5}},
+  b:{l:"Raw landscape & light",s:"Mist, water, mountains, sky",sc:{sanjose:1,sanpancho:1,atitlan:.5}}},
+ {id:"water",n:"Swimming",sub:"Water, or not",
+  t:"Does swimming matter?",
+  a:{l:"Yes — want to get in the water",s:"Ocean or lake swims",sc:{sanpancho:1,atitlan:1}},
+  b:{l:"Not really",s:"Water's not the point",sc:{}}},
+ {id:"travel",n:"Travel effort",sub:"Easy or far",
+  t:"Keep travel easy, or go far for it?",
+  a:{l:"Keep it easy",s:"Short, simple, nonstop if possible",sc:{sanpancho:1,cdmx:1,sancris:.5,oaxaca:.5}},
+  b:{l:"Distance is fine",s:"Worth a long haul for the right place",sc:{atitlan:1,sanjose:1,sancris:.5,oaxaca:.5}}}
+];
+
+var ranking=[];      // axis indices, most-important first
+var answers={};      // axisIndex -> 'a'|'b'|null
+var qi=0;            // position in ranking during quiz
+var $=function(id){return document.getElementById(id)};
+
+function goRank(){$("intro").classList.add("hide");$("rank").classList.remove("hide");renderRank()}
+
+function renderRank(){
+ var html="";
+ AXES.forEach(function(ax,idx){
+  var pos=ranking.indexOf(idx);
+  var badge=pos>=0?(pos+1):"";
+  html+='<button class="opt'+(pos>=0?' ranked':'')+'" onclick="tapRank('+idx+')">'+
+   '<span class="rnk">'+badge+'</span>'+
+   '<span class="txt"><span class="ol">'+ax.n+'</span><span class="os">'+ax.sub+'</span></span></button>';
+ });
+ $("rankopts").innerHTML=html;
+ var done=ranking.length===AXES.length;
+ $("rankgo").disabled=!done;
+ $("ranklead").textContent= done ? "All set — or tap any to reorder. Then continue." :
+   "Tap these in order — most important first ("+ranking.length+"/"+AXES.length+"). Tap one again to undo.";
+}
+function tapRank(idx){
+ var pos=ranking.indexOf(idx);
+ if(pos>=0){ranking.splice(pos,1)} else {ranking.push(idx)}
+ renderRank();
+}
+function resetRank(){ranking=[];renderRank()}
+
+function goQuiz(){if(ranking.length!==AXES.length)return;$("rank").classList.add("hide");$("quiz").classList.remove("hide");qi=0;answers={};renderQ()}
+
+function renderQ(){
+ var ax=AXES[ranking[qi]];
+ var p="";for(var k=0;k<ranking.length;k++){p+='<div class="dot '+(k<qi?'done':k==qi?'now':'')+'"></div>'}
+ $("prog").innerHTML=p;
+ $("q").innerHTML=
+  '<span class="qn">'+(qi+1)+' / '+ranking.length+' · priority #'+(qi+1)+'</span>'+
+  '<h2 class="qt">'+ax.t+'</h2>'+
+  '<div class="opts">'+optBtn(ax.a,'a')+optBtn(ax.b,'b')+
+   '<button class="either" onclick="ans(null)">Either / no preference</button></div>';
+ $("back").classList.toggle("hide",qi===0);
+}
+function optBtn(o,key){return '<button class="opt" onclick="ans(\''+key+'\')"><span class="txt"><span class="ol">'+o.l+'</span><span class="os">'+o.s+'</span></span></button>'}
+function ans(key){answers[ranking[qi]]=key;qi++;if(qi<ranking.length){renderQ()}else{results()}}
+function qBack(){if(qi>0){qi--;renderQ()}}
+
+function results(){
+ var tot={};ORDER.forEach(function(l){tot[l]=0});
+ ranking.forEach(function(axIdx,pos){
+  var weight=AXES.length-pos;          // priority #1 -> 7 ... #7 -> 1  (HER order)
+  var key=answers[axIdx];if(!key)return;
+  var sc=AXES[axIdx][key].sc;
+  for(var l in sc){tot[l]+=sc[l]*weight}
+ });
+ var ranked=ORDER.slice().sort(function(a,b){return tot[b]-tot[a]});
+ var max=tot[ranked[0]]||1,win=ranked[0],rows="";
+ ranked.forEach(function(l,idx){
+  var pct=Math.round(tot[l]/max*100);
+  rows+='<div class="row'+(idx===0?' top':'')+'"><div class="rh"><b>'+(idx+1)+'. '+LOC[l].name+'</b>'+
+   '<span class="pts">'+(Math.round(tot[l]*10)/10)+' pts</span></div>'+
+   '<div class="rd">'+LOC[l].d+'</div><div class="bar"><i style="width:'+pct+'%"></i></div></div>';
+ });
+ var topAx=AXES[ranking[0]].n.toLowerCase();
+ $("quiz").classList.add("hide");
+ var r=$("result");r.classList.remove("hide");r.className="res";
+ r.innerHTML='<h1>Your trip</h1><p class="sub">Weighted by your own priority order — '+topAx+' counted most.</p>'+
+  '<div class="win"><span class="badge">The winner</span><h2>'+LOC[win].name+'</h2><div class="d">'+LOC[win].d+'</div></div>'+
+  rows+'<div class="foot"><button class="btn alt" onclick="goRank()">↺ Start over</button></div>'+
+  '<div class="note">Close call up top? Send Clint the top two and he’ll price both. Connectivity (Starlink for work) is handled separately — not one of these questions.</div>';
+ window.scrollTo({top:0,behavior:"instant"});
+}
+</script>
+</body></html>
