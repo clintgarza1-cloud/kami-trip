@@ -31,8 +31,10 @@ h2.qt{font-size:clamp(23px,5.5vw,30px);margin:6px 0 4px}
 .stand h2,.res h1{font-family:Georgia,serif}
 .stand h2{font-size:24px;margin:4px 0 2px}
 .sublead{color:var(--muted);font-size:14px;margin:0 0 16px}
-.row{margin:11px 0}
+.row{display:block;margin:11px 0;text-decoration:none;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:11px 13px;transition:.12s}
+.row:hover{border-color:#cbb89a}.row:active{transform:scale(.995)}
 .row .rh{display:flex;justify-content:space-between;align-items:baseline}
+.row .rh .pts{color:var(--clay)}
 .row .rh b{font-family:Georgia,serif;font-size:16px}
 .row .rh .pts{color:var(--muted);font:600 12.5px/1 -apple-system,sans-serif}
 .row .rd{font-size:12px;color:var(--muted);margin-top:1px}
@@ -54,7 +56,7 @@ h2.qt{font-size:clamp(23px,5.5vw,30px);margin:6px 0 4px}
 <section id="intro" class="intro">
   <span class="qn">A trip for you</span>
   <h1>What are you drawn to?</h1>
-  <p>Three quick rounds. Each round, drag your picks into order — favorite first. The scores build as you go, and six real places sort themselves out by the end.</p>
+  <p>Three quick rounds. Each round, tap your picks into order — favorite first. Six real places sort themselves out, and you'll see the full ranking at the end.</p>
   <button class="btn" onclick="startRound(0)" style="margin-top:26px">Start →</button>
 </section>
 
@@ -106,9 +108,11 @@ var ROUNDS=[
    {id:"water",  l:"Water you can swim in",   f:{sanpancho:1,atitlan:1}},
    {id:"packed", l:"Packed — lots to do",     f:{cdmx:1,oaxaca:1,sancris:.5,atitlan:.5}}
   ]},
- {label:"Wild cards · The tie-breakers",title:"The finer cuts",
-  lead:"Last four — these break any close call. Favorite first.",wild:true,
+ {label:"Round 3 of 3 · The finer cuts",title:"The finer cuts & her painter's eye",
+  lead:"Last six — these break any close call. Favorite first.",wild:true,
   items:[
+   {id:"pstreets", l:"Colorful streetscapes to paint", f:{sancris:1,oaxaca:1,atitlan:.5,cdmx:.5,sanpancho:.5}},
+   {id:"pland",    l:"Raw landscapes & light to paint",f:{sanjose:1,atitlan:1,sanpancho:.5,sancris:.5,oaxaca:.5}},
    {id:"easy",     l:"Easy, short travel",          f:{cdmx:1,sanpancho:1,oaxaca:.5,sancris:.5}},
    {id:"intimate", l:"Small-town intimacy",         f:{sancris:1,sanjose:1,atitlan:1,sanpancho:1,oaxaca:.5}},
    {id:"markets",  l:"Markets, textiles & craft",   f:{sancris:1,oaxaca:1,atitlan:1,cdmx:.5}},
@@ -159,27 +163,18 @@ function applyRound(){
 function finishRound(){
  if(picks.length!==ROUNDS[ri].items.length)return;
  applyRound();
- if(ri<ROUNDS.length-1){ showStandings() } else { showResult() }
+ if(ri<ROUNDS.length-1){ startRound(ri+1) } else { showResult() }
 }
 
 function rankedList(){var r=ORDER.slice().sort(function(a,b){return tot[b]-tot[a]});return r}
 function rows(ranked,max){
  var h="";ranked.forEach(function(l,idx){
   var pct=Math.round(tot[l]/(max||1)*100);
-  h+='<div class="row'+(idx===0?' top':'')+'"><div class="rh"><b>'+(idx+1)+'. '+LOC[l].name+'</b>'+
-   '<span class="pts">'+(Math.round(tot[l]*10)/10)+'</span></div><div class="rd">'+LOC[l].d+'</div>'+
-   '<div class="bar"><i style="width:'+pct+'%"></i></div></div>';
+  h+='<a class="row'+(idx===0?' top':'')+'" href="deck.html#p-'+l+'">'+
+   '<div class="rh"><b>'+(idx+1)+'. '+LOC[l].name+'</b>'+
+   '<span class="pts">'+(Math.round(tot[l]*10)/10)+' &rsaquo;</span></div><div class="rd">'+LOC[l].d+' · tap to see it</div>'+
+   '<div class="bar"><i style="width:'+pct+'%"></i></div></a>';
  });return h;
-}
-function showStandings(){
- var ranked=rankedList(),max=tot[ranked[0]]||1;
- $("round").classList.add("hide");$("barfix").classList.add("hide");
- var s=$("standings");s.classList.remove("hide");
- s.innerHTML='<span class="qn">After '+ROUNDS[ri].label.split(" · ")[0]+'</span>'+
-  '<h2>Where it stands</h2><p class="sublead">Leader so far — '+LOC[ranked[0]].name+'. One round to go'+(ri===0?'s':'')+'.</p>'+
-  rows(ranked,max)+
-  '<div class="foot"><button class="btn" onclick="startRound('+(ri+1)+')">Next round →</button></div>';
- window.scrollTo({top:0,behavior:"instant"});
 }
 function showResult(){
  var ranked=rankedList(),max=tot[ranked[0]]||1,win=ranked[0];
@@ -194,7 +189,8 @@ function showResult(){
  var r=$("result");r.classList.remove("hide");
  r.innerHTML='<h1>Your trip</h1><p class="sub">Built over three rounds, weighted by what you put first.</p>'+
   '<div class="win"><span class="badge">The winner</span><h2>'+LOC[win].name+'</h2>'+
-  '<div class="d">'+LOC[win].d+'</div>'+(hits.length?'<div class="hit">✓ '+hits.slice(0,5).join(" · ")+'</div>':'')+'</div>'+
+  '<div class="d">'+LOC[win].d+'</div>'+(hits.length?'<div class="hit">✓ '+hits.slice(0,5).join(" · ")+'</div>':'')+
+  '<div style="margin-top:13px"><a class="btn" href="deck.html#p-'+win+'">See '+LOC[win].name.split(" ")[0]+' →</a></div></div>'+
   closeMsg+ rows(ranked,max)+
   '<div class="foot"><button class="btn alt" onclick="location.reload()">↺ Start over</button></div>'+
   '<div class="note">Connectivity (Starlink for Clint to work) and the cost/length math are handled separately — not in these questions.</div>';
