@@ -1,12 +1,12 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>What are you drawn to? — rank it</title><style>
+<title>What are you drawn to? — rounds</title><style>
 :root{--ink:#1d1b16;--cream:#faf7f1;--paper:#fffdf8;--clay:#b5532a;--green:#3f6b54;--gold:#9a7b2e;--line:#e7e0d2;--muted:#7c7568}
 *{box-sizing:border-box}
 html,body{margin:0;overflow-x:hidden}
 body{background:var(--cream);color:var(--ink);font:17px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
 h1,h2,h3{font-family:Georgia,"Iowan Old Style","Times New Roman",serif;font-weight:700;letter-spacing:-.01em;line-height:1.18}
-.wrap{max-width:640px;margin:0 auto;padding:24px 18px 90px;min-height:100vh;display:flex;flex-direction:column}
+.wrap{max-width:640px;margin:0 auto;padding:24px 18px 100px;min-height:100vh;display:flex;flex-direction:column}
 .intro{margin:auto 0;text-align:center}
 .intro h1{font-size:clamp(30px,7vw,42px);margin:.2em 0}
 .intro p{font-size:18px;color:#3f3a31;max-width:31em;margin:14px auto 0}
@@ -14,33 +14,37 @@ h1,h2,h3{font-family:Georgia,"Iowan Old Style","Times New Roman",serif;font-weig
 .btn:active{transform:scale(.98)}.btn.alt{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
 .btn[disabled]{opacity:.35}
 .qn{font:600 13px/1 -apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-h2.qt{font-size:clamp(23px,5.5vw,30px);margin:8px 0 4px}
+.rdots{display:flex;gap:7px;margin:10px 0 4px}
+.rdots span{width:26px;height:5px;border-radius:99px;background:var(--line)}
+.rdots span.done{background:var(--green)}.rdots span.now{background:var(--clay)}
+h2.qt{font-size:clamp(23px,5.5vw,30px);margin:6px 0 4px}
 .lead{color:#3f3a31;font-size:15px;margin:0 0 16px}
-.chips{display:flex;flex-wrap:wrap;gap:10px}
-.chip{display:inline-flex;align-items:center;gap:9px;background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:11px 15px;font:600 15.5px/1 -apple-system,sans-serif;cursor:pointer;transition:.12s;color:var(--ink)}
-.chip:active{transform:scale(.97)}.chip:hover{border-color:#cbb89a}
+.chips{display:flex;flex-direction:column;gap:11px}
+.chip{display:flex;align-items:center;gap:13px;background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;font:600 17px/1.1 Georgia,serif;cursor:pointer;transition:.12s;color:var(--ink);text-align:left}
+.chip:active{transform:scale(.99)}.chip:hover{border-color:#cbb89a}
 .chip.on{background:#eef4ef;border-color:var(--green)}
-.chip .num{display:none;width:22px;height:22px;border-radius:50%;background:var(--green);color:#fff;font:700 12px/22px -apple-system,sans-serif;text-align:center}
-.chip.on .num{display:inline-block}
+.chip .num{flex:0 0 28px;height:28px;border-radius:50%;border:2px solid var(--line);color:var(--muted);font:700 14px/24px -apple-system,sans-serif;text-align:center}
+.chip.on .num{background:var(--green);border-color:var(--green);color:#fff}
 .barfix{position:fixed;left:0;right:0;bottom:0;background:rgba(250,247,241,.96);border-top:1px solid var(--line);padding:12px 18px;display:flex;gap:12px;align-items:center;justify-content:space-between}
 .barfix .cnt{font:600 14px/1.3 -apple-system,sans-serif;color:var(--muted)}
 .link{background:none;border:0;color:var(--clay);font:600 14px/1 -apple-system,sans-serif;cursor:pointer;padding:6px 0}
+.stand h2,.res h1{font-family:Georgia,serif}
+.stand h2{font-size:24px;margin:4px 0 2px}
+.sublead{color:var(--muted);font-size:14px;margin:0 0 16px}
+.row{margin:11px 0}
+.row .rh{display:flex;justify-content:space-between;align-items:baseline}
+.row .rh b{font-family:Georgia,serif;font-size:16px}
+.row .rh .pts{color:var(--muted);font:600 12.5px/1 -apple-system,sans-serif}
+.row .rd{font-size:12px;color:var(--muted);margin-top:1px}
+.bar{height:8px;background:var(--line);border-radius:99px;margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--clay));transition:width .5s}
+.row.top .bar i{background:linear-gradient(90deg,#5a8c6f,var(--green))}
 .res h1{font-size:clamp(26px,6vw,36px);text-align:center;margin:.1em 0 4px}
 .res .sub{text-align:center;color:var(--muted);font-size:14.5px;margin-bottom:20px}
 .win{background:var(--paper);border:1.5px solid var(--green);border-left:6px solid var(--green);border-radius:15px;padding:18px;margin-bottom:18px}
 .win .badge{display:inline-block;background:var(--green);color:#fff;font:700 11px/1 -apple-system,sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border-radius:99px}
-.win h2{font-size:25px;margin:11px 0 3px}.win .d{color:#3f3a31;font-size:14.5px}
-.win .hit{margin-top:9px;font-size:13px;color:var(--green);font-weight:600}
-.row{margin:13px 0}
-.row .rh{display:flex;justify-content:space-between;align-items:baseline}
-.row .rh b{font-family:Georgia,serif;font-size:16.5px}
-.row .rh .pts{color:var(--muted);font:600 13px/1 -apple-system,sans-serif}
-.row .rd{font-size:12.5px;color:var(--muted);margin-top:1px}
-.bar{height:9px;background:var(--line);border-radius:99px;margin-top:6px;overflow:hidden}
-.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--clay))}
-.row.top .bar i{background:linear-gradient(90deg,#5a8c6f,var(--green))}
-.yourorder{margin:18px 0 6px;font-size:13.5px;color:var(--muted)}
-.yourorder b{color:var(--ink)}
+.win h2{font-size:25px;margin:11px 0 3px}.win .d{color:#3f3a31;font-size:14.5px}.win .hit{margin-top:9px;font-size:13px;color:var(--green);font-weight:600}
+.close{background:#fcf3e9;border:1px solid #eccdab;border-radius:12px;padding:13px 15px;font-size:13.5px;margin:16px 0}
 .note{margin-top:22px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
 .foot{margin-top:24px;text-align:center}
 .hide{display:none}
@@ -50,109 +54,150 @@ h2.qt{font-size:clamp(23px,5.5vw,30px);margin:8px 0 4px}
 <section id="intro" class="intro">
   <span class="qn">A trip for you</span>
   <h1>What are you drawn to?</h1>
-  <p>Tap what you want out of this trip — in order, favorite first. Skip anything you don't care about. When you're done, it ranks six real places by what <em>you</em> picked.</p>
-  <button class="btn" onclick="goRank()" style="margin-top:26px">Start →</button>
+  <p>Three quick rounds. Each round, drag your picks into order — favorite first. The scores build as you go, and six real places sort themselves out by the end.</p>
+  <button class="btn" onclick="startRound(0)" style="margin-top:26px">Start →</button>
 </section>
 
-<section id="rank" class="hide">
-  <span class="qn">Round 1</span>
-  <h2 class="qt">Tap in order — favorite first</h2>
-  <p class="lead" id="lead">Pick as many or as few as you like. Tap again to remove. The earlier you tap something, the more it counts.</p>
+<section id="round" class="hide">
+  <span class="qn" id="rlabel"></span>
+  <div class="rdots" id="rdots"></div>
+  <h2 class="qt" id="rtitle"></h2>
+  <p class="lead" id="rlead"></p>
   <div class="chips" id="chips"></div>
 </section>
 
-<section id="result" class="hide"></section>
-
+<section id="standings" class="hide stand"></section>
+<section id="result" class="hide res"></section>
 </div>
 
 <div id="barfix" class="barfix hide">
-  <span class="cnt" id="cnt">0 picked</span>
-  <span><button class="link" onclick="resetRank()">start over</button>
-  <button class="btn" id="go" disabled onclick="results()">See results →</button></span>
+  <span class="cnt" id="cnt"></span>
+  <span><button class="link" onclick="resetRound()">reset</button>
+  <button class="btn" id="go" disabled onclick="finishRound()"></button></span>
 </div>
 
 <script>
 var LOC={
- sancris:{name:"San Cristóbal de las Casas",d:"Highland colonial town · Chiapas, Mexico"},
+ sancris:{name:"San Cristóbal de las Casas",d:"Highland colonial town · Chiapas"},
  atitlan:{name:"Lake Atitlán",d:"Volcano-ringed lake · Guatemala"},
- sanjose:{name:"San José del Pacífico",d:"Cloud-forest cabins · Oaxaca, Mexico"},
+ sanjose:{name:"San José del Pacífico",d:"Cloud-forest cabins · Oaxaca"},
  oaxaca:{name:"Oaxaca City",d:"Food & craft capital · Mexico"},
  sanpancho:{name:"San Pancho",d:"Quiet Pacific beach town · Nayarit"},
  cdmx:{name:"Mexico City",d:"Roma Norte / Condesa"}
 };
 var ORDER=["sancris","atitlan","sanjose","oaxaca","sanpancho","cdmx"];
 
-// flat list of interests; fit 1=strong, .5=some, absent=none
-var INT=[
- {id:"beach",  l:"Beach & ocean",          f:{sanpancho:1}},
- {id:"mtn",    l:"Mountains & highland air",f:{sancris:1,atitlan:1,sanjose:1,oaxaca:.5}},
- {id:"food",   l:"Great food & markets",    f:{oaxaca:1,cdmx:1,sancris:.5,sanpancho:.5,atitlan:.5}},
- {id:"remote", l:"Remote & quiet",          f:{sanjose:1,atitlan:.5,sanpancho:.5}},
- {id:"city",   l:"City energy",             f:{cdmx:1,oaxaca:.5,sancris:.5}},
- {id:"slow",   l:"Slow & restful",          f:{sanjose:1,atitlan:1,sanpancho:1,sancris:.5}},
- {id:"culture",l:"Culture, art & history",  f:{oaxaca:1,cdmx:1,sancris:1,atitlan:.5,sanpancho:.5}},
- {id:"land",   l:"Big landscapes & light",  f:{sanjose:1,atitlan:1,sanpancho:.5,sancris:.5,oaxaca:.5}},
- {id:"cool",   l:"Cool, crisp climate",     f:{sanjose:1,sancris:1,cdmx:1,oaxaca:.5,atitlan:.5}},
- {id:"nature", l:"Nature & the outdoors",   f:{sanjose:1,atitlan:1,sanpancho:.5,sancris:.5,oaxaca:.5}},
- {id:"streets",l:"Colorful streetscapes",   f:{sancris:1,oaxaca:1,atitlan:.5,cdmx:.5,sanpancho:.5}},
- {id:"packed", l:"Packed — lots to do",     f:{cdmx:1,oaxaca:1,sancris:.5,atitlan:.5}},
- {id:"water",  l:"Water you can swim in",   f:{sanpancho:1,atitlan:1}},
- {id:"warm",   l:"Warm & tropical",         f:{sanpancho:1,oaxaca:.5}},
- {id:"easy",   l:"Easy, short travel",      f:{cdmx:1,sanpancho:1,oaxaca:.5,sancris:.5}},
- {id:"walk",   l:"Walkable & strollable",   f:{oaxaca:1,sancris:1,cdmx:1,atitlan:.5,sanpancho:.5}}
+var ROUNDS=[
+ {label:"Round 1 of 3 · The place",title:"What kind of place?",
+  lead:"Tap all five in order — favorite first.",
+  items:[
+   {id:"beach", l:"Beach & ocean",           f:{sanpancho:1}},
+   {id:"mtn",   l:"Mountains & highland air", f:{sancris:1,atitlan:1,sanjose:1,oaxaca:.5}},
+   {id:"city",  l:"City energy",              f:{cdmx:1,oaxaca:.5,sancris:.5}},
+   {id:"remote",l:"Remote & quiet",           f:{sanjose:1,atitlan:.5,sanpancho:.5}},
+   {id:"slow",  l:"Slow & restful",           f:{sanjose:1,atitlan:1,sanpancho:1,sancris:.5}}
+  ]},
+ {label:"Round 2 of 3 · The days",title:"How you'd spend the days",
+  lead:"Tap all five in order — favorite first.",
+  items:[
+   {id:"culture",l:"Culture, art & history",  f:{oaxaca:1,cdmx:1,sancris:1,atitlan:.5,sanpancho:.5}},
+   {id:"nature", l:"Nature & the outdoors",   f:{sanjose:1,atitlan:1,sanpancho:.5,sancris:.5,oaxaca:.5}},
+   {id:"food",   l:"Great food & markets",    f:{oaxaca:1,cdmx:1,sancris:.5,sanpancho:.5,atitlan:.5}},
+   {id:"water",  l:"Water you can swim in",   f:{sanpancho:1,atitlan:1}},
+   {id:"packed", l:"Packed — lots to do",     f:{cdmx:1,oaxaca:1,sancris:.5,atitlan:.5}}
+  ]},
+ {label:"Wild cards · The tie-breakers",title:"The finer cuts",
+  lead:"Last four — these break any close call. Favorite first.",wild:true,
+  items:[
+   {id:"easy",     l:"Easy, short travel",          f:{cdmx:1,sanpancho:1,oaxaca:.5,sancris:.5}},
+   {id:"intimate", l:"Small-town intimacy",         f:{sancris:1,sanjose:1,atitlan:1,sanpancho:1,oaxaca:.5}},
+   {id:"markets",  l:"Markets, textiles & craft",   f:{sancris:1,oaxaca:1,atitlan:1,cdmx:.5}},
+   {id:"seclusion",l:"Off-grid seclusion",          f:{sanjose:1,atitlan:.5,sanpancho:.5}}
+  ]}
 ];
 
-var picked=[]; // interest indices, favorite first
+var ri=0, picks=[], tot={}, allPicks=[];
+ORDER.forEach(function(l){tot[l]=0});
 var $=function(id){return document.getElementById(id)};
 
-function goRank(){$("intro").classList.add("hide");$("rank").classList.remove("hide");$("barfix").classList.remove("hide");render()}
-
-function render(){
+function startRound(idx){
+ ri=idx; picks=[];
+ $("intro").classList.add("hide");$("standings").classList.add("hide");$("result").classList.add("hide");
+ $("round").classList.remove("hide");$("barfix").classList.remove("hide");
+ renderRound();
+}
+function renderRound(){
+ var R=ROUNDS[ri];
+ $("rlabel").textContent=R.label;
+ $("rtitle").textContent=R.title;
+ var dots="";ROUNDS.forEach(function(_,k){dots+='<span class="'+(k<ri?'done':k==ri?'now':'')+'"></span>'});
+ $("rdots").innerHTML=dots;
  var html="";
- INT.forEach(function(it,idx){
-  var pos=picked.indexOf(idx);
+ R.items.forEach(function(it,idx){
+  var pos=picks.indexOf(idx);
   html+='<button class="chip'+(pos>=0?' on':'')+'" onclick="tap('+idx+')">'+
    '<span class="num">'+(pos>=0?(pos+1):'')+'</span>'+it.l+'</button>';
  });
  $("chips").innerHTML=html;
- var n=picked.length;
- $("cnt").textContent=n+" picked";
- $("go").disabled=n<3;
- $("lead").textContent = n<3
-   ? "Pick at least 3 in order. Tap again to remove. Earlier = counts more."
-   : "Great — add more if you want, or see results. Earlier = counts more.";
+ var done=picks.length===R.items.length;
+ $("cnt").textContent=picks.length+" / "+R.items.length+" ranked";
+ $("go").disabled=!done;
+ $("go").textContent = (ri<ROUNDS.length-1) ? "Next round →" : "See result →";
+ $("rlead").textContent = done ? "All set — tap any to reorder, or continue." : R.items[0]?R.items.length+" to rank. Tap again to undo.":"";
 }
-function tap(idx){var p=picked.indexOf(idx);if(p>=0){picked.splice(p,1)}else{picked.push(idx)}render()}
-function resetRank(){picked=[];render()}
+function tap(idx){var p=picks.indexOf(idx);if(p>=0){picks.splice(p,1)}else{picks.push(idx)}renderRound()}
+function resetRound(){picks=[];renderRound()}
 
-function results(){
- if(picked.length<3)return;
- var n=picked.length, tot={}, hits={};
- ORDER.forEach(function(l){tot[l]=0;hits[l]=[]});
- picked.forEach(function(intIdx,pos){
-  var w=n-pos;                       // favorite gets weight n, last gets 1
-  var f=INT[intIdx].f;
-  for(var l in f){tot[l]+=f[l]*w; if(f[l]>=1)hits[l].push(INT[intIdx].l)}
+function applyRound(){
+ var R=ROUNDS[ri], n=picks.length;
+ picks.forEach(function(itemIdx,pos){
+  var w=n-pos, f=R.items[itemIdx].f;
+  for(var l in f){tot[l]+=f[l]*w}
+  allPicks.push(R.items[itemIdx].l);
  });
- var ranked=ORDER.slice().sort(function(a,b){return tot[b]-tot[a]});
- var max=tot[ranked[0]]||1, win=ranked[0], rows="";
- ranked.forEach(function(l,idx){
-  var pct=Math.round(tot[l]/max*100);
-  rows+='<div class="row'+(idx===0?' top':'')+'"><div class="rh"><b>'+(idx+1)+'. '+LOC[l].name+'</b>'+
-   '<span class="pts">'+(Math.round(tot[l]*10)/10)+'</span></div>'+
-   '<div class="rd">'+LOC[l].d+'</div><div class="bar"><i style="width:'+pct+'%"></i></div></div>';
- });
- var topHits=hits[win].slice(0,4).join(" · ")||"your top picks";
- var myorder=picked.map(function(i,k){return (k+1)+". "+INT[i].l}).join("  ");
- $("rank").classList.add("hide");$("barfix").classList.add("hide");
- var r=$("result");r.classList.remove("hide");r.className="res";
- r.innerHTML='<h1>Your trip</h1><p class="sub">Ranked by what you put first.</p>'+
+}
+function finishRound(){
+ if(picks.length!==ROUNDS[ri].items.length)return;
+ applyRound();
+ if(ri<ROUNDS.length-1){ showStandings() } else { showResult() }
+}
+
+function rankedList(){var r=ORDER.slice().sort(function(a,b){return tot[b]-tot[a]});return r}
+function rows(ranked,max){
+ var h="";ranked.forEach(function(l,idx){
+  var pct=Math.round(tot[l]/(max||1)*100);
+  h+='<div class="row'+(idx===0?' top':'')+'"><div class="rh"><b>'+(idx+1)+'. '+LOC[l].name+'</b>'+
+   '<span class="pts">'+(Math.round(tot[l]*10)/10)+'</span></div><div class="rd">'+LOC[l].d+'</div>'+
+   '<div class="bar"><i style="width:'+pct+'%"></i></div></div>';
+ });return h;
+}
+function showStandings(){
+ var ranked=rankedList(),max=tot[ranked[0]]||1;
+ $("round").classList.add("hide");$("barfix").classList.add("hide");
+ var s=$("standings");s.classList.remove("hide");
+ s.innerHTML='<span class="qn">After '+ROUNDS[ri].label.split(" · ")[0]+'</span>'+
+  '<h2>Where it stands</h2><p class="sublead">Leader so far — '+LOC[ranked[0]].name+'. One round to go'+(ri===0?'s':'')+'.</p>'+
+  rows(ranked,max)+
+  '<div class="foot"><button class="btn" onclick="startRound('+(ri+1)+')">Next round →</button></div>';
+ window.scrollTo({top:0,behavior:"instant"});
+}
+function showResult(){
+ var ranked=rankedList(),max=tot[ranked[0]]||1,win=ranked[0];
+ var gap=tot[ranked[0]]-tot[ranked[1]];
+ // hits: which picked interests strongly favored the winner
+ var hits=[];
+ ROUNDS.forEach(function(R){R.items.forEach(function(it){if(it.f[win]>=1 && allPicks.indexOf(it.l)>=0)hits.push(it.l)})});
+ var closeMsg = gap<=1.5
+  ? '<div class="close"><b>Photo finish.</b> '+LOC[ranked[0]].name+' and '+LOC[ranked[1]].name+' are within a hair — both are right for you. Send Clint the top two and he’ll price both.</div>'
+  : '';
+ $("round").classList.add("hide");$("standings").classList.add("hide");$("barfix").classList.add("hide");
+ var r=$("result");r.classList.remove("hide");
+ r.innerHTML='<h1>Your trip</h1><p class="sub">Built over three rounds, weighted by what you put first.</p>'+
   '<div class="win"><span class="badge">The winner</span><h2>'+LOC[win].name+'</h2>'+
-  '<div class="d">'+LOC[win].d+'</div><div class="hit">✓ hits: '+topHits+'</div></div>'+
-  rows+
-  '<div class="yourorder"><b>Your order:</b> '+myorder+'</div>'+
+  '<div class="d">'+LOC[win].d+'</div>'+(hits.length?'<div class="hit">✓ '+hits.slice(0,5).join(" · ")+'</div>':'')+'</div>'+
+  closeMsg+ rows(ranked,max)+
   '<div class="foot"><button class="btn alt" onclick="location.reload()">↺ Start over</button></div>'+
-  '<div class="note">Round 2 goes deeper with the same tap-to-rank style. Close call up top? Send Clint the top two and he’ll price both.</div>';
+  '<div class="note">Connectivity (Starlink for Clint to work) and the cost/length math are handled separately — not in these questions.</div>';
  window.scrollTo({top:0,behavior:"instant"});
 }
 </script>
